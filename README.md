@@ -1,17 +1,23 @@
 # Thought Tank
 
-Dieses Repository beschreibt eine Architektur und Prozesse für die Speicherung und Verwaltung von Notizen/Gedanken.
+Dieses Repository beschreibt eine _Architektur_ für die Speicherung von Notizen/Gedanken und _Prozesse_ für deren Verwaltung.
+Primäres Ziel ist es, mit minimalem Aufwand die maximale Kontrolle über das eigene Gedankengut zu haben.
+Darüber hinaus wollen wir dieses Gedankengut mit dem größten möglichen Komfort weiterentwickeln.  
+Zu diesem Zweck geben wir konkrete Hinweise zur Einrichtung dieser Architektur.
+Zudem stellen wir Tools und Techniken vor, die auf der Grundlage der Architektur die Prozesse unterstützen.
 
+Die Hoffnung ist, dass langfristig eine Ecosystem entsteht in dem unterschiedliche Tools die unterschiedlichen Bedürfnisse der Benutzer befriedigen.
 
-Memex ist .... 
-
+## Warum keine existierenden Webanwendungen?
 Beispielhafte Implementierungen sind:
 - Roam
 - World...
 - Zettelkasten
 
-Ziel ist es, ein Ökosystem zu schaffen, in dem unterschiedliche Systeme an der Erzeugung und Auswertung solcher Systeme beteiligt sind.
-Zu die Zweck beschreiben wir eine einheitliche Struktur zur Datenhaltung und stellen Tools zu deren Erzeugung und Verarbeitung bereit.
+
+## Warum Prozesse?
+Die Prozesse beeinflussen die Eignung der Tools. 
+Die Tools bestimmen die Eignung der Architektur.
 
 # Concept
 
