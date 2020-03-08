@@ -113,3 +113,12 @@ Sollen die Notes eine eigene Inbox bekommen?
 
 
 ### Tools config Verzeichnis 
+
+## Tools
+
+Aus Kindle oder iBooks vielleicht via Readwise.io
+
+### Webbasierter Zugriff
+Wiki.js
+Gollum
+Gitit
