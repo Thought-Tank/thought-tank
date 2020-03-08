@@ -47,12 +47,16 @@ Es sollte jedoch für jeden Arbeits-/Prozessschritte eine adequate Toolunterstü
 
 ### Erfassung
 
-Fleeting Notes
+#### Fleeting Notes
 
 Egal ob ein Gedanke beim Zähneputzen, ein Argument in der Diskussion oder eine interessanten Textpassagen beim Lesen, erst einmal wollen wir die Informationen schnell erfassen.
 Dieses soll geschehen, ohne den aktuellen Kontext zu sehr zu störnen oder gar zu verlassen.
 
-Literature notes
+#### Referenz Box
+Separates Verzeichnis
+Zwei Arten von Einträgen:
+- Referenz Notes: Referenz und kurze Zusammenfassung
+- Literature notes: Roh Ideen aus der Literatur (max 3 Sätze)
 
 Kontext:
 - Quelle
@@ -66,6 +70,10 @@ So kurz wie möglich
 
 Guiding Questions:
 - Wie erweitert ändert oder fordert eine neue Idee eine bereits existierende Idee heraus?
+- Wie passt sich die Idee in das bereits bekannt ein?
+- Kann es auch andere Erklärungen für diese Zusammenhang geben?
+- Was bedeutet x für y?
+- Wie lässt sich dieses nutzen, um z zu erklären?
 
 Referenz behalten, Notiz löschen/archivieren
 
@@ -78,6 +86,8 @@ Referenz behalten, Notiz löschen/archivieren
 Alphabetisch (Keyword)
 
 Ontologie
+
+Keywords: Beziehen sich nicht auf die einzelne. Notiz, sondern auf den Kontext, in dem ich eine Notiz wiederfinden möchte
 
 ### Sequenzen erstellen
 
