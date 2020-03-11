@@ -8,6 +8,27 @@ Zudem stellen wir Tools und Techniken vor, die auf der Grundlage der Architektur
 
 Die Hoffnung ist, dass langfristig eine Ecosystem entsteht in dem unterschiedliche Tools die unterschiedlichen Bedürfnisse der Benutzer in den unterschiedlichen Prozessschritten befriedigen.
 
+Herausforderung: Was an der ursprünglichen Zettelkastenmethode ist essentiell, was der damaligen Zeit in dem Medium geschuldet?
+
+Zettel (in Abteilungen gegliedert, 11 bei Luhmann)
+Bibliographie, mit Exzerpt
+Schlagwortregister
+
+Expliziter Unterschied zwischen Exzerpieren und Verzetteln
+
+Lesen und Exzerpieren im Hinblick auf das Verzetteln (Kontextieren). Entscheidend ist, was für welche anderen Zettel verwendbar ist.
+
+Entscheidend ist die interne Anschlussfähigkeit. Das Rückwärtsverzetteln hebt die Bedeutung des Verzettelten hervor. Man findet es häufiger. Allerdings wird die Bedeutung nicht durch pures Betrachten des Zettels deutlich, sondern durch die Häufigkeit mit der man über ihn stolpert.
+
+Ad hoc Notizen sind bei Luhmann auch eine Abteilung.
+
+Ein Zettel muss nur an der vorherigen anschließen, ob er noch zum Oberthema passt ist irrelevant. Es ist also keine systematische Ordnung => Folge: Mehrfachablage
+
+ Sammelverweise/Hubs
+ Und Schlagwortregister (keine Vollständigkeit der Fundstellen, sondern nur Einstiegspunkte) 
+
+Für die internen Verweise gibt es keine Stop-Kriterien
+
 ## Details
 
 ### Warum Digital statt eines richtigen Zettelkastens?
