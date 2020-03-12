@@ -118,6 +118,10 @@ Um daraus eigene Artikel abzuleiten
 
 
 ## Architecture
+### Verzeichnisstruktur
+/.config für Tools spezifische Konfiguration
+/_* Dateien für nicht zu synchronisierende Dateien und Verzeichnisse der Tools
+
 ### Einordnen in einen Kontext
 Was steht davor, was danach?
 Bei Luhmann ID System
