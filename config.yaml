@@ -2,6 +2,3 @@ baseURL: "http://example.org/"
 languageCode: "en-us"
 title: "My New Hugo Site"
 
-module:
-  imports:
-  - path: github.com/yihui/hugo-xmin
