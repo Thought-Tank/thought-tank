@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html class="has-navbar-fixed-top" prefix="og: http://ogp.me/ns#" lang="de">
+
+<head>
+  {{- partial "header.html" . }}
+  {{/* Individual Header-Information, for isntance to load expensive scripts. See search vor example */}}
+  {{ block "individual-header" . }}
+  {{ end }}
+</head>
+
+<body>
+  {{- partial "navbar.html" . -}}
+
+  <div class="columns">
+    <div class="column is-two-thirds is-offset-2">
+      {{ block "main" . }}
+      <!-- The part of the page that begins to differ between templates -->
+      {{ end }}
+    </div>
+  </div>
+
+  <footer class="footer has-background-primary">
+    <div class="content has-text-centered">
+      {{ partial "footer.html" . }}
+    </div>
+  </footer>
+
+  {{ partial "scripts.html" . }}
+
+</body>
+
+</html>

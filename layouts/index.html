@@ -1,0 +1,24 @@
+{{ define "main" }}
+
+<section class="section" style="-moz-hyphens: auto;
+   -o-hyphens: auto;
+   -webkit-hyphens: auto;
+   -ms-hyphens: auto;
+   hyphens: auto; ">
+    <h1 class="title is-1">{{ .Title }}</h1>
+    <h2 class="subtitle is-4">
+        {{- if eq $.Site.Language.Lang "de"}}
+        {{- index $.Site.Data.wochentag (.Date.Format "Monday") }}, {{ .Date.Day }}
+        {{ index $.Site.Data.monat (printf "%d" .Date.Month) }} {{ .Date.Year }}
+        {{- else }}
+        {{- dateFormat "Monday, 2 Januar 2006" .Date }}
+        {{- end -}}
+    </h2>
+    ich war hier layouts/index.html
+
+    <div class="content">
+        {{ .Content }}
+    </div>
+</section>
+
+{{ end }}

@@ -1,0 +1,57 @@
+<nav class="navbar is-fixed-top" role="navigation" aria-label="main navigation">
+    <div class="navbar-brand">
+        <a class="navbar-item" href="{{ .Site.BaseURL }}/">
+            {{ if not .IsHome }}
+            <span class="icon is-medium fa-lg has-text-primary">
+                <i class="fas fa-chevron-left"></i>
+            </span>
+            {{ end }}
+            <p class="title has-text-primary">
+                Gasshuku
+            </p>
+        </a>
+        <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false"
+            data-target="navbarBasicExample">
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+        </a>
+    </div>
+
+    <div id="navbarBasicExample" class="navbar-menu">
+        <div class="navbar-start">
+            {{ $currentPage := . }}
+            {{ range .Site.Menus.main }}
+            <a class="navbar-item {{ if $currentPage.IsMenuCurrent "main" . }}is-active{{ end }}" href="{{ .URL }}">
+                {{ .Title }}
+            </a>
+            {{ end }}
+        </div>
+
+        <div class="navbar-end">
+            {{ $currentPage := . }}
+            {{ range .Site.Menus.navbar_right }}
+            <a class="navbar-item {{ if $currentPage.IsMenuCurrent "navbar_right" . }}is-active{{ end }}"
+                href="{{ .URL }}">
+                {{ .Title }}
+            </a>
+            {{ end }}
+
+            <div class="navbar-item has-dropdown is-hoverable">
+                <a class="navbar-link is-arrowless">
+                    <span class="icon">
+                        <i class="fab fa-twitter"></i>
+                    </span>
+                </a>
+                <div class="navbar-dropdown is-right">
+                    <a class="navbar-item"
+                        href="https://twitter.com/intent/tweet?{{ (querify "text" "Gasshuku 2019 in Tamm - Webapp" "url" .Permalink ) | safeURL }}">
+                        Tweet this page</a>
+                    <a class="navbar-item" href="https://twitter.com/Gasshuku2019">
+                        Follow @Gasshuku2019
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>

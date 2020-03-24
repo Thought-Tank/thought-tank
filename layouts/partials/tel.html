@@ -1,0 +1,1 @@
+<a href="tel:{{ replace . "(0)" "" | replaceRE "[^0-9+]" "" }}">{{ . }}</a>

@@ -1,0 +1,42 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{ .Title }}</title>
+
+{{ $options := (dict "targetPath" "/css/bulma.css" "outputStyle" "compressed" "enableSourceMap" true) }}
+{{ $bulmastyle := resources.Get "css/bulma/sass/mystyles.scss" | resources.ToCSS $options }}
+<link rel="stylesheet" href="{{ $bulmastyle.RelPermalink }}">
+
+<script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+
+{{ partial "custom-header.html" . }}
+
+<meta name="twitter:card" content="summary">
+</meta>
+<meta name="twitter:site" content="@{{ .Site.Params.twitter }}">
+{{ template "_internal/opengraph.html" . }}
+
+{{- with .Params.bpmn }}
+{{- $image_file := resources.Get (printf "%s%s" . ".png") }}
+{{- $image := $image_file.Fill "1200x627" }}
+<meta property="og:image" itemprop="image" content="http://gasshuku-tamm.de{{ $image.RelPermalink }}" />
+<meta property="og:image:secure_url" itemprop="image" content="{{ $image.Permalink }}" />
+<meta property="twitter:image" content="{{ $image.Permalink }}" />
+{{- end }}
+{{- with .Params.opengraph }}
+{{- $image_file := resources.Get . }}
+{{- $image := $image_file.Fill "1200x627" }}
+<meta property="og:image" itemprop="image" content="http://gasshuku-tamm.de{{ $image.RelPermalink }}" />
+<meta property="og:image:secure_url" itemprop="image" content="{{ $image.Permalink }}" />
+<meta property="twitter:image" content="{{ $image.Permalink }}" />
+{{- end }}
+
+<meta name="Description" content="Webapp supporting visitors of Gasshuku 2019 in Tamm, BW, Germany">
+
+<!-- Favicons -->
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/site.webmanifest">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="msapplication-TileColor" content="#da532c">
+<meta name="theme-color" content="#ffffff">

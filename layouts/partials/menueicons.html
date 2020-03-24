@@ -1,0 +1,30 @@
+<section class="section">
+    <div class="columns is-mobile is-multiline is-centered">
+
+        {{ range .Site.Menus.main }}
+        <div class="column is-narrow">
+            <div class="card" style="width: 150px;">
+                <a href="{{ .URL }}" style="text-decoration: none; color: inherit;">
+                    <br />
+                    <div class="card-image has-text-centered">
+                        <figure class="image">
+                            <span class="fa-stack fa-3x">
+                                <i class="fas fa-circle fa-stack-2x has-text-dark has-text-primary"></i>
+                                {{ with .Page.Params.icon }}
+                                <i class="fas {{ . }} fa-stack-1x fa-inverse"></i>
+                                {{ end }}
+                            </span>
+                        </figure>
+                    </div>
+                    <div class="card-content" style="hyphens: auto;">
+                        <p class="title is-6 has-text-centered">
+                            {{ .Title }}
+                        </p>
+                    </div>
+                </a>
+            </div>
+        </div>
+        {{ end }}
+
+    </div>
+</section>
