@@ -1,0 +1,23 @@
+{{ define "main" }}
+
+<section class="section" style="-moz-hyphens: auto;
+   -o-hyphens: auto;
+   -webkit-hyphens: auto;
+   -ms-hyphens: auto;
+   hyphens: auto; ">
+    <h1 class="title is-1">{{ .Title }}</h1>
+
+    <div class="content">
+        {{ .Content }}
+    </div>
+
+    {{/* range where .Site.RegularPages "Section" "notes" */}}
+    {{ range (.Paginate ((where .Site.RegularPages "Section" "notes").GroupByParamDate "Lastmod" "2006-01-02")).PageGroups  }}
+    <h1>FOO</h1>
+    {{ range .Pages }}
+    {{ .Title }} ({{.Date}} | {{.Lastmod}})<br>
+    {{end}}
+    {{end}}
+</section>
+
+{{ end }}
