@@ -30,34 +30,17 @@
     {{ range . }}
     {{ with $.Site.GetPage (path.Join "/notes" .id) }}
     {{ $linked = $linked | append . }}
-    <a href="{{.Permalink}}">{{.Title}}</a><br>
-    <p>{{ .Summary }}</p>
-
+    {{ .Render "summary" }}
     {{ end }}
     {{ end }}
     {{ end }}
 
-    {{ $linked }}
-
-    {{.Site.RegularPages.Related .}}
-    
     {{ $related := (where (.Site.RegularPages.Related .) "Section" "notes") | complement $linked | first 10 }}
 
     {{ with $related }}
     <h2 class="title is-2">Related Notes</h2>
     {{ range . }}
-    <p>
-        <a href="{{.Permalink}}">{{.Title}}</a><br>
-        {{ with .Params.keywords }}
-        {{ range . }}
-        <span class="tag">
-            {{ . }}
-        </span>
-        {{ end }}
-        {{ end }}
-
-    </p>
-
+    {{ .Render "summary" }}
     {{ end }}
     {{ end }}
 

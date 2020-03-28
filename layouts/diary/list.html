@@ -16,12 +16,7 @@
     <h2 class="title is-2">{{ dateFormat "Monday, 02.01.2006" .Key }}</h2>
 
     {{ range .Pages }}
-    {{ if (and (eq (time .Date).Year (time .Lastmod).Year) (eq (time .Date).YearDay (time .Lastmod).YearDay))}}
-    created
-    {{ else }}
-    modified
-    {{ end }}
-    {{ .Title }} ({{.Date}} | {{.Lastmod}})<br>
+    {{ .Render "summary" }}
     {{end}}
     {{end}}
 
