@@ -8,6 +8,8 @@
 
     <h1 class="title is-1">{{ .Title }}</h1>
 
+    <a href="/admin/#/edit/notes/{{ .Params.id }}">(edit)</a>
+
     <div class="content">
         {{ with .Params.keywords }}
         {{ range . | sort }}

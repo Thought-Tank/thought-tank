@@ -1,21 +1,24 @@
-
-    <h1 class="title is-3">
+<h1 class="title is-3">
+    <a href="{{ .Permalink }}">
         {{ if (and (eq (time .Date).Year (time .Lastmod).Year) (eq (time .Date).YearDay (time .Lastmod).YearDay))}}
         (created)
         {{ else }}
         (modified)
         {{ end }}
         {{ .Title }}
-    </h1>
+    </a>
+</h1>
 
-    <div class="content">
-        {{ with .Params.keywords }}
-        {{ range . | sort }}
-        <span class="tag">
-            {{ . }}
-        </span>
-        {{ end }}
-        {{ end }}
+<a href="/admin/#/edit/notes/{{ .Params.id }}">(edit)</a>
 
-        {{ .Summary }}
-    </div>
+<div class="content">
+    {{ with .Params.keywords }}
+    {{ range . | sort }}
+    <span class="tag">
+        {{ . }}
+    </span>
+    {{ end }}
+    {{ end }}
+
+    {{ .Summary }}
+</div>
