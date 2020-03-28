@@ -1,0 +1,81 @@
+{{ define "main" }}
+
+<section class="section" style="-moz-hyphens: auto;
+   -o-hyphens: auto;
+   -webkit-hyphens: auto;
+   -ms-hyphens: auto;
+   hyphens: auto; ">
+
+    <h1 class="title is-1">{{ .Title }}</h1>
+
+    <div class="content">
+        {{ with .Params.keywords }}
+        {{ range . }}
+        <span class="tag">
+            {{ . }}
+        </span>
+        {{ end }}
+        {{ end }}
+    </div>
+
+    <div class="content">
+        {{ .Content }}
+    </div>
+
+    {{ $linked := slice }}
+
+    {{ with .Params.linked_notes }}
+    <h2 class="title is-2">Linked Notes</h2>
+
+    {{ range . }}
+    {{ with $.Site.GetPage (path.Join "/notes" .id) }}
+    {{ $linked = $linked | append . }}
+    <a href="{{.Permalink}}">{{.Title}}</a><br>
+    <p>{{ .Summary }}</p>
+
+    {{ end }}
+    {{ end }}
+    {{ end }}
+
+    {{ $linked }}
+
+    {{.Site.RegularPages.Related .}}
+    
+    {{ $related := (where (.Site.RegularPages.Related .) "Section" "notes") | complement $linked | first 10 }}
+
+    {{ with $related }}
+    <h2 class="title is-2">Related Notes</h2>
+    {{ range . }}
+    <p>
+        <a href="{{.Permalink}}">{{.Title}}</a><br>
+        {{ with .Params.keywords }}
+        {{ range . }}
+        <span class="tag">
+            {{ . }}
+        </span>
+        {{ end }}
+        {{ end }}
+
+    </p>
+
+    {{ end }}
+    {{ end }}
+
+
+    {{ with .Params.references }}
+    <h2 class="title is-2">References</h2>
+ 
+    {{ range . }}
+    {{ with $.Site.GetPage (path.Join "/references" .id) }}
+    <a href="{{.Permalink}}">{{ with .Params.authors }}{{ delimit . ", " " & "}}: {{ end }}{{.Title}}</a><br>
+    <p>
+        {{ .Summary }}
+    </p>
+
+    {{ end }}
+    {{ end }}
+    {{ end }}
+
+</section>
+
+{{ end }}
