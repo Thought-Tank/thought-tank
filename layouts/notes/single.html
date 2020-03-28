@@ -9,7 +9,7 @@
     <h1 class="title is-1">{{ .Title }}</h1>
 
     <div class="content">
-        {{ with .Params.keywords }}
+        {{ with .Params.keywords | sort }}
         {{ range . }}
         <span class="tag">
             {{ . }}
