@@ -9,8 +9,8 @@
     <h1 class="title is-1">{{ .Title }}</h1>
 
     <div class="content">
-        {{ with .Params.keywords | sort }}
-        {{ range . }}
+        {{ with .Params.keywords }}
+        {{ range . | sort }}
         <span class="tag">
             {{ . }}
         </span>
