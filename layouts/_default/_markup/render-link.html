@@ -1,0 +1,50 @@
+{{- /*
+    Link render hook for detecting and formating internal links to notes and references
+*/ -}}
+{{- /* For debugging purpose
+    <hr>
+    <h1>{{.Text}}</h1><br>
+
+    To: {{ .Destination }}<br>
+
+    {{ $url := (urls.Parse .Destination)}}
+
+    Host: "{{ $url.Host }}"<br>
+
+    Path: {{ $url.Path }}<br>
+
+    RawPath: {{ $url.RawPath }}<br>
+*/ -}}
+{{- $destination := .Destination | safeURL -}}
+{{- $text := .Text | safeHTML -}}
+{{- $title := .Title -}}
+{{- $class_attr := "" -}}
+
+{{/* Shortest form is no path and id in text field */}}
+{{- if eq (len $destination) 0 -}}
+{{- $destination = $text -}}
+{{- $text = "" -}}
+{{- end -}}
+
+{{/* just links to own host (or missing host information) */}}
+{{- $url := (urls.Parse $destination) -}}
+{{- if or (eq $url.Host "") (eq $url.Host ( urls.Parse .Page.Site.Params.baseURL ).Host ) -}}
+
+{{/* just pure number links or links below /notes path */}}
+{{- if findRE "^/?(notes/)?([[:digit:]]{16})" $url.Path -}}
+
+{{/* just if note with given id exists */}}
+{{- $note_id := index (findRE "[[:digit:]]{16}" $url.Path) 0 -}}
+{{- $note_page := .Page.Site.GetPage (path.Join "/notes" $note_id) -}}
+{{- if $note_page -}}
+{{- $destination = $note_page.Permalink -}}
+{{- $title = $note_page.Title -}}
+{{- $text = default $note_page.Title $text -}}
+{{- $class_attr = "note-link" -}}
+{{- end -}}
+{{- end -}}
+{{- end -}}
+<a href="{{ $destination }}"
+{{- with $title }} title="{{ . }}"{{ end }}
+{{- with $class_attr }} class="{{ . }}"{{ end -}}
+>{{ $text }}</a>
