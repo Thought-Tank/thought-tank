@@ -24,20 +24,30 @@
         {{ .Content }}
     </div>
 
-    {{ $linked := slice }}
 
-    {{ with .Params.linked_notes }}
+    {{/* In a render hook we add class="note-link" to all valid note links */}}
+    {{ $linked_ids := slice }}
+    {{ range findRE "<a .*? class=\".*?note-link.*?\".*>.*?</a>" .Content }}
+        {{ $linked_ids = $linked_ids | append (index (findRE "href=\".*?\"" .) 0 | findRE "[[:digit:]]{16}") }}
+    {{ end}}
+    
+    {{ $linked_notes := slice }}
+    {{ range $linked_ids | uniq }}
+    {{ $linked_notes = $linked_notes | append ($.Site.GetPage (path.Join "/notes" .)) }}
+    {{ end }}
+
+    {{/* Do not list self references*/}}
+    {{ $linked_notes = $linked_notes | complement (slice .) }}
+
+    {{ with $linked_notes }}
     <h2 class="title is-2">Linked Notes</h2>
-
+    
     {{ range . }}
-    {{ with $.Site.GetPage (path.Join "/notes" .id) }}
-    {{ $linked = $linked | append . }}
     {{ .Render "summary" }}
     {{ end }}
     {{ end }}
-    {{ end }}
 
-    {{ $related := (where (.Site.RegularPages.Related .) "Section" "notes") | complement $linked | first 10 }}
+    {{ $related := (where (.Site.RegularPages.Related .) "Section" "notes") | complement $linked_notes | first 10 }}
 
     {{ with $related }}
     <h2 class="title is-2">Related Notes</h2>
