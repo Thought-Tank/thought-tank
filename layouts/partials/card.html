@@ -1,0 +1,23 @@
+<div class="card">
+    <header class="card-header">
+        <p class="card-header-title">
+            {{ .Title }}
+        </p>
+        <div class="tags">
+            {{ range .Params.categories }}
+            <a href="" class="tag card-header-icon is-primary is-medium">{{ . }}</a>
+            {{ end }}
+        </div>
+    </header>
+    <div class="card-content">
+        {{ partial "keyword-line" (dict "content" . ) }}
+        <div class="content">
+            {{ .Summary}}
+        </div>
+    </div>
+    <footer class="card-footer">
+        <a href="{{ .Permalink }}" class="card-footer-item">Open</a>
+        <a href="/admin/#/edit/notes/{{ .Params.id }}" class="card-footer-item">Edit</a>
+        <a href="#" class="card-footer-item">Copy ID</a>
+    </footer>
+</div>
