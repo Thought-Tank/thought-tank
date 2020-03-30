@@ -10,15 +10,7 @@
 
     <a href="/admin/#/edit/notes/{{ .Params.id }}">(edit)</a>
 
-    <div class="content">
-        {{ with .Params.keywords }}
-        {{ range . | sort }}
-        <span class="tag">
-            {{ . }}
-        </span>
-        {{ end }}
-        {{ end }}
-    </div>
+    {{ partial "keyword-line.html" . }}
 
     <div class="content">
         {{ .Content }}
