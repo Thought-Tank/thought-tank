@@ -1,68 +1,81 @@
 {{ define "main" }}
 
-<section class="section" style="-moz-hyphens: auto;
-   -o-hyphens: auto;
-   -webkit-hyphens: auto;
-   -ms-hyphens: auto;
-   hyphens: auto; ">
+<section class="section">
+    <div class="container">
+        <h1 class="title is-1">{{ .Title }}</h1>
 
-    <h1 class="title is-1">{{ .Title }}</h1>
+        <a href="/admin/#/edit/notes/{{ .Params.id }}">(edit)</a>
 
-    <a href="/admin/#/edit/notes/{{ .Params.id }}">(edit)</a>
+        {{ partial "keyword-line.html"  (dict "content" . "tohighlight" .Params.keywords ) }}
 
-    {{ partial "keyword-line.html"  (dict "content" . "tohighlight" .Params.keywords ) }}
-
-    <div class="content">
-        {{ .Content }}
+        <div class="content">
+            {{ .Content }}
+        </div>
     </div>
-
-
-    {{/* In a render hook we add class="note-link" to all valid note links */}}
-    {{ $linked_ids := slice }}
-    {{ range findRE "<a .*? class=\".*?note-link.*?\".*>.*?</a>" .Content }}
-        {{ $linked_ids = $linked_ids | append (index (findRE "href=\".*?\"" .) 0 | findRE "[[:digit:]]{16}") }}
-    {{ end}}
-    
-    {{ $linked_notes := slice }}
-    {{ range $linked_ids | uniq }}
-    {{ $linked_notes = $linked_notes | append ($.Site.GetPage (path.Join "/notes" .)) }}
-    {{ end }}
-
-    {{/* Do not list self references*/}}
-    {{ $linked_notes = $linked_notes | complement (slice .) }}
-
-    {{ with $linked_notes }}
-    <h2 class="title is-2">Linked Notes</h2>
-    
-    {{ range . }}
-    {{ .Render "summary" }}
-    {{ end }}
-    {{ end }}
-
-    {{ $related := (where (.Site.RegularPages.Related .) "Section" "notes") | complement $linked_notes | first 10 }}
-
-    {{ with $related }}
-    <h2 class="title is-2">Related Notes</h2>
-    {{ range . }}
-    {{ .Render "summary" }}
-    {{ end }}
-    {{ end }}
-
-
-    {{ with .Params.references }}
-    <h2 class="title is-2">References</h2>
- 
-    {{ range . }}
-    {{ with $.Site.GetPage (path.Join "/references" .id) }}
-    <a href="{{.Permalink}}">{{ with .Params.authors }}{{ delimit . ", " " & "}}: {{ end }}{{.Title}}</a><br>
-    <p>
-        {{ .Summary }}
-    </p>
-
-    {{ end }}
-    {{ end }}
-    {{ end }}
-
 </section>
+
+
+{{/* In a render hook we add class="note-link" to all valid note links */}}
+{{ $linked_ids := slice }}
+{{ range findRE "<a .*? class=\".*?note-link.*?\".*>.*?</a>" .Content }}
+{{ $linked_ids = $linked_ids | append (index (findRE "href=\".*?\"" .) 0 | findRE "[[:digit:]]{16}") }}
+{{ end}}
+
+{{ $linked_notes := slice }}
+{{ range $linked_ids | uniq }}
+{{ $linked_notes = $linked_notes | append ($.Site.GetPage (path.Join "/notes" .)) }}
+{{ end }}
+
+{{/* Do not list self references*/}}
+{{ $linked_notes = $linked_notes | complement (slice .) }}
+
+{{ with $linked_notes }}
+<section class="section">
+    <div class="container">
+        <h2 class="title is-2">Linked Notes</h2>
+
+        <div class="content">
+            {{ range . }}
+            {{ .Render "summary" }}
+            {{ end }}
+        </div>
+    </div>
+</section>
+{{ end }}
+
+{{ $related := (where (.Site.RegularPages.Related .) "Section" "notes") | complement $linked_notes | first 10 }}
+
+{{ with $related }}
+<section class="section">
+    <div class="container">
+        <h2 class="title is-2">Related Notes</h2>
+
+        <div class="content">
+            {{ range . }}
+            {{ .Render "summary" }}
+            {{ end }}
+        </div>
+    </div>
+</section>
+{{ end }}
+
+
+{{ with .Params.references }}
+<section class="section">
+    <div class="container">
+        <h2 class="title is-2">References</h2>
+
+        <div class="content">
+            {{ range . }}
+            {{ with $.Site.GetPage (path.Join "/references" .id) }}
+            <a href="{{.Permalink}}">{{ with .Params.authors }}{{ delimit . ", " " & "}}: {{ end }}{{.Title}}</a><br>
+            {{ .Summary }}
+            {{ end }}
+            {{ end }}
+        </div>
+    </div>
+</section>
+{{ end }}
+
 
 {{ end }}
