@@ -10,7 +10,7 @@
 
     <a href="/admin/#/edit/notes/{{ .Params.id }}">(edit)</a>
 
-    {{ partial "keyword-line.html" . }}
+    {{ partial "keyword-line.html"  (dict "content" . "tohighlight" .Params.keywords ) }}
 
     <div class="content">
         {{ .Content }}

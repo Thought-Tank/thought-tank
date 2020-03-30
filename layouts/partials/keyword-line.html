@@ -1,12 +1,13 @@
 {{- /* Keywords a linked to keyword pages, some could be highlighted */ -}}
-{{ with .Params.keywords }}
+{{ with .content.Params.keywords }}
 <div class="tags">
     {{ range . | sort }}
-    {{- with $.Site.GetPage (printf "/keywords/%s" (. | urlize)) -}}
-    <span class="tag is-link is-light">
-        <a href={{ .Permalink }}>{{ .LinkTitle }}</a>
-    </span>
-    {{- end }}
+    {{- $term := . }}
+    {{- with $.content.Site.GetPage (printf "/keywords/%s" ($term | urlize)) -}}
+    <a href="{{ .Permalink }}" class="tag is-link{{ with not (in $.tohighlight $term) }} is-light{{ end }}">
+        {{ .LinkTitle }}
+    </a>
     {{ end }}
+    {{- end }}
 </div>
-{{ end }}
+{{- end }}
