@@ -39,7 +39,8 @@
 {{- if $note_page -}}
 {{- $destination = $note_page.Permalink -}}
 {{- $title = $note_page.Title -}}
-{{- $text = default $note_page.Title $text -}}
+{{- $text = (cond (eq $text "#") $note_page.Title $text)  -}}
+{{- $text = $text | default $note_page.Title -}}
 {{- $class_attr = "note-link" -}}
 {{- end -}}
 {{- end -}}
