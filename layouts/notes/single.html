@@ -6,7 +6,7 @@
 
         <a href="/admin/#/edit/notes/{{ .Params.id }}">(edit)</a>
 
-        {{ partial "keyword-line.html"  (dict "content" . "tohighlight" .Params.keywords ) }}
+        {{ partial "keyword-line.html" (dict "content" . "tohighlight" .Params.keywords ) }}
 
         <div class="content">
             {{ .Content }}
@@ -36,7 +36,7 @@
 
         <div class="content">
             {{ range . }}
-            {{ partial "card.html" . }}
+            {{ partial "card.html" (dict "content" . "tohighlight" $.Params.keywords ) }}
             {{ end }}
         </div>
     </div>
@@ -52,7 +52,7 @@
 
         <div class="content">
             {{ range . }}
-            {{ partial "card.html" . }}
+            {{ partial "card.html" (dict "content" . "tohighlight" $.Params.keywords ) }}
             {{ end }}
         </div>
     </div>
