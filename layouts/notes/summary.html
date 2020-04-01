@@ -9,7 +9,7 @@
     </a>
 </h1>
 
-<a href="/admin/#/edit/notes/{{ .Params.id }}">(edit)</a>
+{{ partial "edit-button.html" (dict "content" . ) }}
 
 {{ partial "keyword-line.html" (dict "content" . ) }}
 

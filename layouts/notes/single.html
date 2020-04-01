@@ -4,7 +4,7 @@
     <div class="container">
         <h1 class="title is-1">{{ .Title }}</h1>
 
-        <a href="/admin/#/edit/notes/{{ .Params.id }}">(edit)</a>
+        {{ partial "edit-button.html" (dict "content" . ) }}
 
         {{ partial "keyword-line.html" (dict "content" . "tohighlight" .Params.keywords ) }}
 
