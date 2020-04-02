@@ -5,7 +5,9 @@
         </p>
         <div class="tags">
             {{ range .content.Params.topics }}
-            <a href="" class="tag card-header-icon is-primary is-medium">{{ . }}</a>
+            {{ with $.content.Site.GetPage ( path.Join "/topics" (. | urlize)) }}
+            <a href="{{ .Permalink }}" class="tag card-header-icon is-primary is-medium">{{ .Title }}</a>
+            {{ end }}
             {{ end }}
         </div>
     </header>
