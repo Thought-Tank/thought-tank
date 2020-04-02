@@ -4,6 +4,6 @@ Hier auch
 
 [References](/references)
 
-[Categories](/categories)
+[Topics](/topics)
 
 [Diary](/diary)
