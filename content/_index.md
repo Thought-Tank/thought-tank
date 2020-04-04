@@ -1,9 +1,7 @@
-Hier auch
+---
+---
+{{< button-enter-note >}}
 
-[Notes](/notes)
+{{< entrypoints >}}
 
-[References](/references)
-
-[Topics](/topics)
-
-[Diary](/diary)
+{{< changes limit=10 >}}

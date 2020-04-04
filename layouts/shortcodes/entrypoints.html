@@ -1,0 +1,12 @@
+{{ with .Site.Taxonomies.tags.entrypoint }}
+<section class="section box">
+    <h1 class="title is-2">Entry Points</h1>
+    
+    {{ .Pages.GroupByParam "topic" }}
+    <ul>
+        {{ range (.Pages.ByParam "topics" | first ( $.Get "limit" | default 5)) }}
+        <li>{{ .Params.topics }} <a href="{{ .Permalink }}">{{ .Title }}</a></li>
+        {{ end }}
+    </ul>
+</section>
+{{ end }}
