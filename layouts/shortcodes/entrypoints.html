@@ -1,12 +1,17 @@
 {{ with .Site.Taxonomies.tags.entrypoint }}
 <section class="section box">
-    <h1 class="title is-2">Entry Points</h1>
+    <h2 class="title is-2">Entry Points</h2>
     
-    {{ .Pages.GroupByParam "topic" }}
+    {{ $topic_groups := .Pages.GroupByParam "topic" }}
+    {{ range $topic_groups }}
+    {{ if ge (len $topic_groups) 2 }}
+    <h3 class="title is-3">Topic {{ .Key }}</h3>
+    {{ end }}
     <ul>
-        {{ range (.Pages.ByParam "topic" | first ( $.Get "limit" | default 5)) }}
-        <li>{{ .Params.topic }} <a href="{{ .Permalink }}">{{ .Title }}</a></li>
+        {{ range (.Pages | first ( $.Get "limit" | default 5)) }}
+        <li><a href="{{ .Permalink }}">{{ .Title }}</a></li>
         {{ end }}
     </ul>
+    {{ end }}
 </section>
 {{ end }}
