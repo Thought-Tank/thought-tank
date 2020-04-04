@@ -2,7 +2,7 @@
 <section class="section box">
     <h2 class="title is-2">Entry Points</h2>
     
-    {{ $topic_groups := .Pages.GroupByParam "topic" }}
+    {{ $topic_groups := .Pages.GroupByParam "topics" }}
     {{ range $topic_groups }}
     {{ if ge (len $topic_groups) 2 }}
     <h3 class="title is-3">Topic {{ .Key }}</h3>

@@ -4,7 +4,7 @@
             {{ .content.Title }}
         </p>
         <div class="tags">
-            {{ with .content.Params.topic }}
+            {{ with .content.Params.topics }}
             {{ with $.content.Site.GetPage ( path.Join "/topics" (. | urlize)) }}
             <a href="{{ .Permalink }}" class="tag card-header-icon is-primary is-medium">{{ .Title }}</a>
             {{ end }}
