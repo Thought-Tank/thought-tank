@@ -1,6 +1,6 @@
 ---
 title: Diary
-menu: main
+#menu: main
 weight: 30
 ---
 
