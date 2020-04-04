@@ -4,8 +4,8 @@
     
     {{ .Pages.GroupByParam "topic" }}
     <ul>
-        {{ range (.Pages.ByParam "topics" | first ( $.Get "limit" | default 5)) }}
-        <li>{{ .Params.topics }} <a href="{{ .Permalink }}">{{ .Title }}</a></li>
+        {{ range (.Pages.ByParam "topic" | first ( $.Get "limit" | default 5)) }}
+        <li>{{ .Params.topic }} <a href="{{ .Permalink }}">{{ .Title }}</a></li>
         {{ end }}
     </ul>
 </section>
