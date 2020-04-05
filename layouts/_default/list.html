@@ -1,19 +1,43 @@
 {{ define "main" }}
-<h1 class="title is-1">{{ .Title }}</h1>
 
-<div class="content">
-  {{ .Content }}
+<h1 class="title is-1">{{ .Data.Singular | humanize }}: {{ .Title }}</h1>
+<h1 class="subtitle is-4">{{with .Content}}Description and {{end}}List of Notes</h1>
 
-  {{ range .Pages }}
-  <h2><a href="{{ .Permalink }}">{{ .Title }}</a></h2>
-  {{ .Summary }}
-
-  {{ end }}
-
-</div>
+{{ with .Content }}
+<section class="section">
+  <div class="container">
+    <div class="content">
+      {{ . }}
+    </div>
+  </div>
+</section>
 {{ end }}
 
+{{/* Show entrypoints into topic first */}}
+{{ $notesEntryPoints := intersect .Pages (($.Site.GetPage "tags").Data.Terms.Get "entrypoint").Pages }}
 
-{{ define "sidetoc" }}
-<!--empty-->
+{{ with $notesEntryPoints }}
+<section class="section">
+  <div class="container">
+    <h2 class="title is-3">Entry Points with the {{$.Data.Singular | humanize }}</h2>
+    {{ range .ByTitle }}
+    {{ partial "card.html" (dict "content" .) }}
+    {{ end }}
+  </div>
+</section>
+{{ end }}
+
+{{ $notesBesideEntryPoints := .Pages.ByTitle | complement $notesEntryPoints }}
+{{ with $notesBesideEntryPoints }}
+<section class="section">
+  <div class="container">
+    <h2 class="title is-3">Notes with the {{$.Data.Singular | humanize }}</h2>
+
+    {{ range . }}
+    {{ partial "card.html" (dict "content" .) }}
+    {{ end }}
+  </div>
+</section>
+{{ end }}
+
 {{ end }}

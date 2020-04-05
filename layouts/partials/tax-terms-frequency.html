@@ -1,0 +1,16 @@
+<!--
+    
+-->
+<div class="field is-grouped is-grouped-multiline">
+    {{ range (.PreviousTaxoTerm.Page.Site.GetPage .Taxo).Data.Terms.Alphabetical }}
+    {{ $count := len (intersect .Pages $.PreviousTaxoTerm.Pages )}}<br>
+    {{ if ge $count 1}}
+    <div class="control">
+        <a class="tags has-addons {{$.Taxo}}-type" href="{{ .Page.Permalink }}">
+            <span class="tag is-primary">{{ .Term }}</span>
+            <span class="tag is-dark"> {{ $count}}</span>
+        </a>
+    </div>
+    {{ end }}
+    {{ end }}
+</div>
