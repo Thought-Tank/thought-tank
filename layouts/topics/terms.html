@@ -1,0 +1,22 @@
+{{ define "main" }}
+<h1 class="title is-1">List of Topics</h1>
+
+{{ range .Data.Terms.Alphabetical }}
+<h1 class="title is-4"><a href="{{ .Page.Permalink }}">{{ .Page.Title }}</a></h1>
+<div class="content">
+  <dl>
+    <dt>
+      <strong>Description</strong>
+    </dt>
+    <dd>{{ .Page.Content }}</dd>
+    <dt>
+      <strong>
+        Number of Notes
+      </strong>
+    </dt>
+    <dd>{{ .Count }} </dd>
+  </dl>
+</div>
+{{ end }}
+
+{{ end }}

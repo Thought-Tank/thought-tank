@@ -1,0 +1,27 @@
+{{ define "main" }}
+<h1 class="title is-1">{{ .Title }}</h1>
+<h1 class="subtitle is-4">Description and List of Notes</h1>
+
+<div class="content">
+  {{ .Content }}
+</div>
+
+{{/* Show entrypoints into topic first */}}
+{{ $topicsEntryPoints := intersect .Pages (($.Site.GetPage "tags").Data.Terms.Get "entrypoint").Pages }}
+
+{{ with $topicsEntryPoints }}
+<h2 class="title is-2">Entry Points of Topic</h2>
+{{ range .ByTitle }}
+{{ partial "card.html" (dict "content" .) }}
+{{ end }}
+{{ end }}
+
+{{ with $topicsEntryPoints }}
+<h2 class="title is-2">Notes on Topic</h2>
+{{ end }}
+
+{{ range .Pages.ByTitle | complement $topicsEntryPoints }}
+{{ partial "card.html" (dict "content" .) }}
+{{ end }}
+
+{{ end }}
