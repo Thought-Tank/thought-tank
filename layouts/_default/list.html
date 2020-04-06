@@ -19,7 +19,8 @@
 {{ with $notesEntryPoints }}
 <section class="section">
   <div class="container">
-    <h2 class="title is-3">Entry Points with the {{$.Data.Singular | humanize }}</h2>
+    <h2 class="title is-3">Entry Points Notes of {{$.Data.Singular | humanize }} "{{ $.Title }}"</h2>
+    Notes tagged as <code>entrypoint</code>.
     {{ range .ByTitle }}
     {{ partial "card.html" (dict "content" .) }}
     {{ end }}
@@ -31,7 +32,7 @@
 {{ with $notesBesideEntryPoints }}
 <section class="section">
   <div class="container">
-    <h2 class="title is-3">Notes with the {{$.Data.Singular | humanize }}</h2>
+    <h2 class="title is-3">{{with $notesEntryPoints}}Further {{end}}Notes of {{$.Data.Singular | humanize }} "{{ $.Title }}"</h2>
 
     {{ range . }}
     {{ partial "card.html" (dict "content" .) }}
