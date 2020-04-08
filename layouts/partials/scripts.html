@@ -1,3 +1,8 @@
+{{ $script := .Site.Data.webpack.main }}
+{{ with $script.js }}
+  <script src="{{ relURL . }}"></script>
+{{ end }}
+
 <script type="text/javascript">
   document.addEventListener('DOMContentLoaded', () => {
 

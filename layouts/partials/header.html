@@ -2,10 +2,17 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{{ .Title }}</title>
 
-{{ $options := (dict "targetPath" "/css/bulma.css" "outputStyle" "compressed" "enableSourceMap" true) }}
-{{ $bulmastyle := resources.Get "css/bulma/sass/mystyles.scss" | resources.ToCSS $options }}
-<link rel="stylesheet" href="{{ $bulmastyle.RelPermalink }}">
+{{ $stylesheet := .Site.Data.webpack.main }}
+{{ with $stylesheet.css }}
+  <link href="{{ relURL . }}" rel="stylesheet">
+{{ end }}
 
+{{/*
+    {{ $options := (dict "targetPath" "/css/bulma.css" "outputStyle" "compressed" "enableSourceMap" true) }}
+    {{ $bulmastyle := resources.Get "css/bulma/sass/mystyles.scss" | resources.ToCSS $options }}
+    <link rel="stylesheet" href="{{ $bulmastyle.RelPermalink }}">
+    */}}
+    
 <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
 
 {{ partial "custom-header.html" . }}
