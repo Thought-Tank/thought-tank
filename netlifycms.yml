@@ -1,7 +1,3 @@
-#backend:
-#  name: github
-#  repo: ChrisLasar/my-thoughts 
-
 media_folder: "static/images" # Media files will be stored in the repo under static/images/uploads
 public_folder: "/images" # The src attribute for uploaded media will begin with /images/uploads
 
@@ -9,7 +5,7 @@ collections:
   - name: "notes" # Used in routes, e.g., /admin/collections/blog
     label: "Notes" # Used in the UI
     label_singular: "Note"
-    folder: "content/notes/" # The path to the folder where the documents are stored
+    folder: "site/content/notes/" # The path to the folder where the documents are stored
     description: "Collection of plain notes/thoughts."
     summary: "{{topics}}: \"{{title}}\" ({{id}})"
     sortableFields:
@@ -75,7 +71,7 @@ collections:
     label: "References" # Used in the UI
     label_singular: "Reference"
     summary: "\"{{title}}\" by {{authors}} ({{id}})"
-    folder: "content/references/" # The path to the folder where the documents are stored
+    folder: "site/content/references/" # The path to the folder where the documents are stored
     description: "Collection of references."
     editor:
       preview: false
@@ -100,7 +96,7 @@ collections:
       - {label: "Channel", name: "channel", widget: "hidden", default: "webeditor"}
   - name: "topics" # Used in routes, e.g., /admin/collections/blog
     label: "Topics" # Used in the UI
-    folder: "content/topics/" # The path to the folder where the documents are stored
+    folder: "site/content/topics/" # The path to the folder where the documents are stored
     path: "{{slug}}/_index" # Path and name needed for hugo taxonomies
     description: "Topics to structure notes and references. Keep the number small."
     editor:
