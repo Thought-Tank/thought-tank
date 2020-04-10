@@ -1,0 +1,114 @@
+#backend:
+#  name: github
+#  repo: ChrisLasar/my-thoughts 
+
+media_folder: "static/images" # Media files will be stored in the repo under static/images/uploads
+public_folder: "/images" # The src attribute for uploaded media will begin with /images/uploads
+
+collections:
+  - name: "notes" # Used in routes, e.g., /admin/collections/blog
+    label: "Notes" # Used in the UI
+    label_singular: "Note"
+    folder: "content/notes/" # The path to the folder where the documents are stored
+    description: "Collection of plain notes/thoughts."
+    summary: "{{topics}}: \"{{title}}\" ({{id}})"
+    sortableFields:
+      - 'id'
+      - 'topics'
+      - 'commit_date'
+    editor:
+      preview: false
+    #path: "{{year}}{{month}}{{day}}/{{slug}}"
+    #slug: "{{year}}{{month}}{{day}}{{hour}}{{minute}}{{second}}" # Filename template, e.g., YYYY-MM-DD-title.md
+    create: true # Allow users to create new documents in this collection
+    slug: "{{fields.id}}" # same as stored ID to get name in relations
+    format: frontmatter
+    fields: # The fields for each document, usually in front matter
+      - {label: "WHY? So What?", name: "title", widget: "string", hint: "Should explain the \"So what?\". WHY is this thought relevant to the reader?" }
+      - label: "Topic"
+        name: "topics"
+        widget: "relation"
+        collection: "topics"
+        required: false
+        searchFields: ["title"]
+        valueField: "title"
+      - label: "HOW?"
+        name: "body"
+        hint: >
+          HOW we came to the conclusion/advise/consequence stated in the next field (WHAT).
+        widget: "markdown"
+        minimal: true
+        buttons: ["bold", "italic", "link", "quote", "bulleted-list", "numbered-list"]
+      - label: "WHAT? Conclusion, Advise, Consequence"
+        name: "summary"
+        required: false
+        hint: >
+          WHAT should the reader do? WHAT does it mean to him?
+        widget: "markdown"
+        minimal: true
+        buttons: ["bold", "italic", "link", "quote", "bulleted-list", "numbered-list"]
+      - {label: "Keywords", name: "keywords", widget: "list", hint: "Comma separated list of central keywords. Use singular terms.", required: false}
+      - {label: "Tags", name: "tags", widget: "list", hint: "Comma separated list of tags. Use singular terms.", required: false}
+      - label: "List of References"
+        name: "references"
+        widget: "list"
+        required: false
+        fields:
+        - label: "Reference ID"
+          name: "id"
+          widget: "relation"
+          collection: "references"
+          required: false
+          displayFields: ["title","authors"]
+          searchFields: ["title","authors","id"]
+          valueField: "id"
+        - label: "Further notes"
+          hint: "For example page number or information on addition content in reference"
+          name: "note"
+          widget: "string"
+          required: false
+      - {label: "Flow State", name: "flow", widget: "list", hint: "Comma separated list of flow states.", required: false, default: ["inbox"]}
+      - {label: "Publish Date", name: "date", widget: "datetime"}
+      - {label: "For ID computation (do not change)", name: "id", widget: "datetime", format: "YYYYMMDDHHmmssSS", hint: "DO NOT CHANGE. Changing this date won't allow you to create valid links to this note in the future."}
+      - {label: "Channel", name: "channel", widget: "hidden", default: "webeditor"}
+  - name: "references" # Used in routes, e.g., /admin/collections/blog
+    label: "References" # Used in the UI
+    label_singular: "Reference"
+    summary: "\"{{title}}\" by {{authors}} ({{id}})"
+    folder: "content/references/" # The path to the folder where the documents are stored
+    description: "Collection of references."
+    editor:
+      preview: false
+    create: true # Allow users to create new documents in this collection
+    slug: "{{fields.id}}" # same as stored ID to get name in relations
+    format: frontmatter
+    fields: # The fields for each document, usually in front matter
+      - {label: "Title", name: "title", widget: "string"}
+      - {label: "Authors", name: "authors", widget: "list", hint: "Comma separated list of authors."}
+      - {label: "Link", name: "link", widget: "string", required: false, hint: "URL, if available."}
+      - {label: "Summary/Notes", name: "body", widget: "markdown", hint: "Use this to make notes during reading.", required: false}
+      - label: "Topic"
+        name: "topics"
+        widget: "relation"
+        collection: "topics"
+        required: false
+        searchFields: ["title"]
+        valueField: "title"
+      - {label: "Bibliographic Details", name: "bibliography", widget: "text", hint: "For example the bibtex entry.", required: false}
+      - {label: "Date of Registration", name: "date", widget: "datetime", hint: "When did you add this to the list of references."}
+      - {label: "For ID computation (do not change)", name: "id", widget: "datetime", format: "YYYYMMDDHHmmssSS", hint: "DO NOT CHANGE. Changing this date won't allow you to create valid links to this note in the future."}
+      - {label: "Channel", name: "channel", widget: "hidden", default: "webeditor"}
+  - name: "topics" # Used in routes, e.g., /admin/collections/blog
+    label: "Topics" # Used in the UI
+    folder: "content/topics/" # The path to the folder where the documents are stored
+    path: "{{slug}}/_index" # Path and name needed for hugo taxonomies
+    description: "Topics to structure notes and references. Keep the number small."
+    editor:
+      preview: false
+    create: true # Allow users to create new documents in this collection
+    format: frontmatter
+    fields: # The fields for each document, usually in front matter
+      - {label: "Topic Name", name: "title", widget: "string"}
+      - {label: "Description", name: "body", widget: "markdown", hint: "Give an extended description of the purpose of notes collected under this topic", required: false}
+
+
