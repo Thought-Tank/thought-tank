@@ -28,8 +28,6 @@
     <a href="/about">About/Impressum</a> | <a href="/privacy">Privacy Statement</a>
 </p>
 
-<p>
-    <a href="https://app.netlify.com/sites/gasshuku2019/deploys"><img
-            src="https://api.netlify.com/api/v1/badges/868aa961-8e20-4224-896a-85c6986ef981/deploy-status"
-            alt="Netlify Status"></a>
-</p>
+{{ with .Site.Params.netlify.status_badge }}
+{{ partialCached "netlify-status_badge.html" . }}
+{{ end }}
