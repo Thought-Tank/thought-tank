@@ -1,7 +1,7 @@
 <div class="card">
     <header class="card-header">
         <p class="card-header-title">
-            {{ .content.Title }}
+            <a href="{{ .content.Permalink }}">{{ .content.Title }}</a>
         </p>
         <div class="tags">
             {{ with .content.Params.topics }}
