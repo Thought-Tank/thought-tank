@@ -16,7 +16,7 @@
     "url": "https://github.com/Thought-Tank/thought-tank/issues"
   },
   "homepage": "https://github.com/Thought-Tank/thought-tank#readme",
-  "devDependencies": {
+  "dependencies": {
     "@fortawesome/fontawesome-free": "^5.13.0",
     "bulma": "^0.8.1",
     "bulmaswatch": "^0.8.0",
