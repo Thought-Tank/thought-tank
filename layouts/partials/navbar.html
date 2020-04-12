@@ -39,8 +39,9 @@
 
             <div class="navbar-item has-dropdown is-hoverable">
                 <a class="navbar-link is-arrowless">
-                    <span class="icon">
-                        <i class="fab fa-twitter"></i>
+                    {{ $svg := resources.Get "svg/fa-svgs/brands/twitter.svg" }}
+                    <span class="icon is-small">
+                        <img class="icon" src="{{ $svg.Permalink }}" alt="Twitter">
                     </span>
                 </a>
                 <div class="navbar-dropdown is-right">
