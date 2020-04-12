@@ -1,0 +1,5 @@
+backend:
+  name: {{ .Site.Params.backend.name }}
+  repo: {{ .Site.Params.backend.repo }}
+  branch: {{ .Site.Params.backend.branch }}
+
