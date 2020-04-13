@@ -10,9 +10,10 @@ module:
     mounts:
     - source: svgs
       target: assets/svg/fa-svgs
-  - path: ../../node_modules/netlify-cms
-    ignoreConfig: true
-    disable: false
-    mounts:
-    - source: dist
-      target: assets/js/netlify
+  # also add netlifycms to package.json before activating (!Build time expensive)
+  # - path: ../../node_modules/netlify-cms
+  #   ignoreConfig: true
+  #   disable: false  
+  #   mounts:
+  #   - source: dist
+  #     target: assets/js/netlify
