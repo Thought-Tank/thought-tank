@@ -19,7 +19,9 @@
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.13.0",
     "bulma": "^0.8.1",
-    "bulmaswatch": "^0.8.0",
+    "bulmaswatch": "^0.8.0"
+  },
+  "BUILD_TIME_EXPENSIVE_AS_LARGE_dependencies": {
     "netlify-cms": "^2.10.43"
   }
 }

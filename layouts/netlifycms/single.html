@@ -1,5 +1,6 @@
 <!doctype html>
 <html>
+
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -8,17 +9,21 @@
 
   <!--script src="https://identity-js.netlify.com/v1/netlify-identity-widget.js"></script-->
 </head>
+
 <body>
   {{/* Head and base needs to be split, as base also contains '{{' patterns, whcih confuses the template engine */}}
-  {{ $cmsConfigHead := resources.Get "netlifycms/config_head_template.yml"  | resources.ExecuteAsTemplate "config_head.yml" . }}
-  {{ $cmsConfigBase := resources.Get "netlifycms/config_base.yml" }}
-  {{ $cmsConfig := slice $cmsConfigHead $cmsConfigBase | resources.Concat "/admin/config.yml" }}
+  {{- $cmsConfigHead := resources.Get "netlifycms/config_head_template.yml"  | resources.ExecuteAsTemplate "config_head.yml" . }}
+  {{- $cmsConfigBase := resources.Get "netlifycms/config_base.yml" }}
+  {{- $cmsConfig := slice $cmsConfigHead $cmsConfigBase | resources.Concat "/admin/config.yml" }}
   <!-- Create config at {{$cmsConfig.Permalink}}" -->
 
-
-  <!--script src="https://unpkg.com/netlify-cms@^2.0.0/dist/netlify-cms.js"></script-->
- <script src="{{ (resources.Get "js/netlify/netlify-cms.js").Permalink }}"></script>
-   
+  {{- $netlify_js_app := resources.Get "js/netlify/netlify-cms.js" }}
+  {{- with $netlify_js_app }}
+  <script src="{{ .Permalink }}"></script>
+  {{- else }}
+  <script src="https://unpkg.com/netlify-cms@^2.0.0/dist/netlify-cms.js"></script>
+  {{- end }}
 
 </body>
+
 </html>
