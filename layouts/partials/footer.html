@@ -27,7 +27,3 @@
 <p>
     <a href="/about">About/Impressum</a> | <a href="/privacy">Privacy Statement</a>
 </p>
-
-{{ with .Site.Params.netlify.status_badge }}
-{{ partialCached "netlify-status_badge.html" . }}
-{{ end }}
