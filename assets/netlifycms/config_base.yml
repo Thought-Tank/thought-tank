@@ -20,7 +20,6 @@ collections:
     slug: "{{fields.id}}" # same as stored ID to get name in relations
     format: frontmatter
     fields: # The fields for each document, usually in front matter
-      - {label: "WHY? So What?", name: "title", widget: "string", hint: "Should explain the \"So what?\". WHY is this thought relevant to the reader?" }
       - label: "Topic"
         name: "topics"
         widget: "relation"
@@ -28,6 +27,7 @@ collections:
         required: false
         searchFields: ["title"]
         valueField: "title"
+      - {label: "WHY? So What?", name: "title", widget: "string", hint: "Should explain the \"So what?\". WHY is this thought relevant to the reader?" }
       - label: "HOW?"
         name: "body"
         hint: >
