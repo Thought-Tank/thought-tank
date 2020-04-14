@@ -47,6 +47,23 @@
 </section>
 {{ end }}
 
+{{ with index .Site.Data.backlinks .Params.id }}
+
+{{/* TODO remove duplicates */}}
+<section class="section">
+    <div class="container">
+        <h2 class="title is-2">Linking Notes</h2>
+        <div class="content">
+
+            {{ range . }}
+            {{ $referring_page := $.Site.GetPage (path.Join "/notes" (index . "from"))}}
+            {{ partial "card.html" (dict "content" $referring_page "tohighlight" $.Params.keywords ) }}
+            {{ end }}
+        </div>
+    </div>
+</section>
+{{ end }}
+
 {{ $related := (where (.Site.RegularPages.Related .) "Section" "notes") | complement $linked_notes | first 10 }}
 
 {{ with $related }}
