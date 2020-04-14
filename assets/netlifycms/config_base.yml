@@ -34,10 +34,10 @@ collections:
           HOW we came to the conclusion/advise/consequence stated in the next field (WHAT).
         widget: "markdown"
         minimal: true
+        required: false
         buttons: ["bold", "italic", "link", "quote", "bulleted-list", "numbered-list"]
       - label: "WHAT? Conclusion, Advise, Consequence"
         name: "summary"
-        required: false
         hint: >
           WHAT should the reader do? WHAT does it mean to him?
         widget: "markdown"
