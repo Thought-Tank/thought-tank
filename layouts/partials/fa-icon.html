@@ -1,0 +1,4 @@
+{{ $svg := resources.Get (printf "svg/fa-svgs/%s.svg" .icon) }}
+<span class={{ printf "\"icon %s \"" .class }}>
+    <img class="icon" src="{{ $svg.Permalink }}" alt=.alt>
+</span>

@@ -2,11 +2,9 @@
     <div class="navbar-brand">
         <a class="navbar-item" href="{{ .Site.BaseURL }}/">
             {{ if not .IsHome }}
-            <span class="icon is-medium fa-lg has-text-primary">
-                <i class="fas fa-chevron-left"></i>
-            </span>
+            {{partial "fa-icon" (dict "icon" "solid/chevron-left" "alt" "Back" "class" "is-medium has-text-primary")}}
             {{ end }}
-            <p class="title has-text-primary">
+            <p class="title">
                 Thought Tank
             </p>
         </a>
@@ -39,10 +37,7 @@
 
             <div class="navbar-item has-dropdown is-hoverable">
                 <a class="navbar-link is-arrowless">
-                    {{ $svg := resources.Get "svg/fa-svgs/brands/twitter.svg" }}
-                    <span class="icon is-small">
-                        <img class="icon" src="{{ $svg.Permalink }}" alt="Twitter">
-                    </span>
+                    {{partial "fa-icon" (dict "icon" "brands/twitter" "alt" "Twitter")}}
                 </a>
                 <div class="navbar-dropdown is-right">
                     <a class="navbar-item"
