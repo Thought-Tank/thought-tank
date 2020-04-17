@@ -12,18 +12,9 @@
             <th></th>
         </tr>
     </thead>
-    <tfoot>
-        {{ with .format }}
-        {{ range . }}
-        <th>{{.colTitle}}</th>
-        {{ end }}
-        {{ end }}
-    <th>Note</th>
-        <th></th>
-    </tr>
-    </tfoot>
 
-    {{ range .data }}
+    {{ with .data}}
+    {{ range . }}
     {{ $note:= . }}
     {{ if $.format }}
     {{ $note =  $.global.Site.GetPage .path }}
@@ -38,5 +29,8 @@
         <td><a href="{{$note.Permalink}}">{{ $note.Title }}</a></td>
         <td><a href="/admin/#/edit/notes/{{ $note.Params.id }}">edit</a></td>
     </tr>
+    {{ end }}
+    {{ else }}
+    <tr><td colspan="{{ add 2 (len $.format)}}" align="center">{{ emojify ":thumbsup: congrats, nothing to do here" }}</td></tr>
     {{ end }}
 </table>
