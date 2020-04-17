@@ -1,0 +1,12 @@
+{{- $entries := slice }}
+
+{{- range where $.Page.Site.RegularPages "Section" "notes" }}
+    {{- $incomingLinks:= 0 }}
+    {{- with index .Site.Data.backlinks .Params.id }}
+    {{- $incomingLinks = len . }}
+    {{ end }}
+    {{- $pageInfo := (dict "id" .Params.id "path" .File.Path "incomingLinks" $incomingLinks "titleLength" (.Title | countrunes) "summaryLength" (.Summary | countrunes) "keywordCount" (len .Keywords ))}}
+    {{- $entries = $entries | append $pageInfo }}
+{{- end }}
+
+{{ return $entries }}

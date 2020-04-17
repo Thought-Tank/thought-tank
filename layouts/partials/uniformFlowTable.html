@@ -1,0 +1,42 @@
+{{/* With parameter format data contains additional Information to print */}}
+
+<table class="table is-striped is-fullwidth">
+    <thead>
+        <tr>
+            {{ with .format }}
+            {{ range . }}
+            <th>{{.colTitle}}</th>
+            {{ end }}
+            {{ end }}
+            <th>Note</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tfoot>
+        {{ with .format }}
+        {{ range . }}
+        <th>{{.colTitle}}</th>
+        {{ end }}
+        {{ end }}
+    <th>Note</th>
+        <th></th>
+    </tr>
+    </tfoot>
+
+    {{ range .data }}
+    {{ $note:= . }}
+    {{ if $.format }}
+    {{ $note =  $.global.Site.GetPage .path }}
+    {{ end }}
+
+    {{ $data := . }}
+
+    <tr>
+        {{ range $.format }}
+        <td>{{ index $data .colValue }}</td>
+        {{ end }}
+        <td><a href="{{$note.Permalink}}">{{ $note.Title }}</a></td>
+        <td><a href="/admin/#/edit/notes/{{ $note.Params.id }}">edit</a></td>
+    </tr>
+    {{ end }}
+</table>

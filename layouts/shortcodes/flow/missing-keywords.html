@@ -1,0 +1,3 @@
+{{ $data:= (where (partialCached "getNoteStats" . ) ".keywordCount" "==" 0)}}
+
+{{ partial "uniformFlowTable" (dict "format" (slice (dict "colTitle" "# Keywords" "colValue" "keywordCount")) "data" $data "global" . ) }}

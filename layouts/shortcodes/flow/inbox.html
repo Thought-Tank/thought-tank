@@ -1,0 +1,4 @@
+{{ $data:= where (where .Site.RegularPages "Section" "notes" ) ".Params.flow" "intersect" (slice "inbox")}}
+
+{{ partial "uniformFlowTable" (dict "data" $data "global" . ) }}
+
