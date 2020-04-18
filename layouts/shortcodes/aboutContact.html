@@ -1,0 +1,14 @@
+<div class="content">
+    {{ with .Site.Params.about.contact.phone }}
+    <strong>Phone: </strong>{{ . }}<br>
+    {{ end }}
+    {{ with .Site.Params.about.contact.email }}
+    <strong>E-Mail:</strong> <a href="mailto:{{ . }}">{{ . }}</a>
+    {{ end }}<br>
+    <strong>Internet address:</strong>
+    {{ with .Site.Params.about.contact.internet }}
+    <a href="{{ . }}">{{ . }}</a>
+    {{ else }}
+    <a href="{{ .Site.BaseURL }}">{{ .Site.BaseURL }}</a>
+    {{ end }}
+</div>
