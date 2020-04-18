@@ -37,7 +37,7 @@
 {{- $note_id := index (findRE "[[:digit:]]{16}" $url.Path) 0 -}}
 {{- $note_page := .Page.Site.GetPage (path.Join "/notes" $note_id) -}}
 {{- if $note_page -}}
-{{- $destination = $note_page.Permalink -}}
+{{- $destination = $note_page.RelPermalink -}}
 {{- with .Page.Site.Params.appendTitleToNotesUrl -}}
 {{- $destination = path.Join $destination (urlize $note_page.Title) -}}
 {{- end -}}
