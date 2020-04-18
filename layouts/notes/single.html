@@ -37,14 +37,12 @@
 <section class="section">
     <div class="container">
         <h2 class="title is-2">Linked Notes</h2>
-
-        <div class="content">
-            {{ range . }}
-            {{ partial "card.html" (dict "content" . "tohighlight" $.Params.keywords ) }}
-            {{ end }}
-        </div>
     </div>
 </section>
+
+{{ range . }}
+{{ partial "card.html" (dict "content" . "tohighlight" $.Params.keywords ) }}
+{{ end }}
 {{ end }}
 
 {{ with index .Site.Data.backlinks .Params.id }}
@@ -52,16 +50,13 @@
 {{/* TODO remove duplicates */}}
 <section class="section">
     <div class="container">
-        <h2 class="title is-2">Linking Notes</h2>
-        <div class="content">
-
-            {{ range . }}
-            {{ $referring_page := $.Site.GetPage (path.Join "/notes" (index . "from"))}}
-            {{ partial "card.html" (dict "content" $referring_page "tohighlight" $.Params.keywords ) }}
-            {{ end }}
-        </div>
+        <h2 class="title is-2">Notes Linking this Note</h2>
     </div>
 </section>
+{{ range . }}
+{{ $referring_page := $.Site.GetPage (path.Join "/notes" (index . "from"))}}
+{{ partial "card.html" (dict "content" $referring_page "tohighlight" $.Params.keywords ) }}
+{{ end }}
 {{ end }}
 
 {{ $related := (where (.Site.RegularPages.Related .) "Section" "notes") | complement $linked_notes | first 10 }}
@@ -69,15 +64,12 @@
 {{ with $related }}
 <section class="section">
     <div class="container">
-        <h2 class="title is-2">Related Notes</h2>
-
-        <div class="content">
-            {{ range . }}
-            {{ partial "card.html" (dict "content" . "tohighlight" $.Params.keywords ) }}
-            {{ end }}
-        </div>
+        <h2 class="title is-2">Possibly related Notes</h2>
     </div>
 </section>
+{{ range . }}
+{{ partial "card.html" (dict "content" . "tohighlight" $.Params.keywords ) }}
+{{ end }}
 {{ end }}
 
 
@@ -85,17 +77,14 @@
 <section class="section">
     <div class="container">
         <h2 class="title is-2">References</h2>
-
-        <div class="content">
-            {{ range . }}
-            {{ with $.Site.GetPage (path.Join "/references" .id) }}
-            <a href="{{.Permalink}}">{{ with .Params.authors }}{{ delimit . ", " " & "}}: {{ end }}{{.Title}}</a><br>
-            {{ .Summary }}
-            {{ end }}
-            {{ end }}
-        </div>
     </div>
 </section>
+{{ range . }}
+{{ with $.Site.GetPage (path.Join "/references" .id) }}
+<a href="{{.Permalink}}">{{ with .Params.authors }}{{ delimit . ", " " & "}}: {{ end }}{{.Title}}</a><br>
+{{ .Summary }}
+{{ end }}
+{{ end }}
 {{ end }}
 
 
