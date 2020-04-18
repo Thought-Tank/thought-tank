@@ -1,7 +1,9 @@
 {{ define "main" }}
 
-<h1 class="title is-1">{{ .Data.Singular | humanize }}: {{ .Title }}</h1>
-<h1 class="subtitle is-4">{{with .Content}}Description and {{end}}List of Notes</h1>
+<section class="section">
+  <h1 class="title is-1">{{ .Data.Singular | humanize }}: {{ .Title }}</h1>
+  <h1 class="subtitle is-4">{{with .Content}}Description and {{end}}List of Notes</h1>
+</section>
 
 {{ with .Content }}
 <section class="section">
@@ -19,26 +21,29 @@
 {{ with $notesEntryPoints }}
 <section class="section">
   <div class="container">
-    <h2 class="title is-3">Entry Points Notes of {{$.Data.Singular | humanize }} "{{ $.Title }}"</h2>
+    <h2 class="title is-3">Entry Points with {{$.Data.Singular | humanize }} "{{ $.Title }}"</h2>
     Notes tagged as <code>entrypoint</code>.
-    {{ range .ByTitle }}
-    {{ partial "card.html" (dict "content" .) }}
-    {{ end }}
   </div>
 </section>
+{{ range .ByTitle }}
+{{ partial "card.html" (dict "content" .) }}
+{{ end }}
 {{ end }}
 
 {{ $notesBesideEntryPoints := .Pages.ByTitle | complement $notesEntryPoints }}
 {{ with $notesBesideEntryPoints }}
+{{with $notesEntryPoints}}
 <section class="section">
   <div class="container">
-    <h2 class="title is-3">{{with $notesEntryPoints}}Further {{end}}Notes of {{$.Data.Singular | humanize }} "{{ $.Title }}"</h2>
-
-    {{ range . }}
-    {{ partial "card.html" (dict "content" .) }}
-    {{ end }}
+    <h2 class="title is-3">Further Notes with {{$.Data.Singular | humanize }}
+      "{{ $.Title }}"</h2>
   </div>
 </section>
+{{end}}
+
+{{ range . }}
+{{ partial "card.html" (dict "content" .) }}
+{{ end }}
 {{ end }}
 
 {{ end }}
