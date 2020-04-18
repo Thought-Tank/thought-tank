@@ -30,7 +30,7 @@
 {{- $url := (urls.Parse $destination) -}}
 {{- if or (eq $url.Host "") (eq $url.Host ( urls.Parse .Page.Site.Params.baseURL ).Host ) -}}
 
-{{/* just pure number links or links below /notes path */}}
+{{/* only ID or ID following "/notes"-path */}}
 {{- if findRE "^/?(notes/)?([[:digit:]]{16})" $url.Path -}}
 
 {{/* just if note with given id exists */}}
@@ -38,6 +38,9 @@
 {{- $note_page := .Page.Site.GetPage (path.Join "/notes" $note_id) -}}
 {{- if $note_page -}}
 {{- $destination = $note_page.Permalink -}}
+{{- with .Page.Site.Params.appendTitleToNotesUrl -}}
+{{- $destination = path.Join $destination (urlize $note_page.Title) -}}
+{{- end -}}
 {{- $title = $note_page.Title -}}
 {{- $text = (cond (eq $text "#") $note_page.Title $text)  -}}
 {{- $text = $text | default $note_page.Title -}}
