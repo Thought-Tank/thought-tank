@@ -1,26 +1,28 @@
-<div class="card">
-    <header class="card-header">
-        <p class="card-header-title">
-            <a href="{{ .content.Permalink }}">{{ .content.Title }}</a>
-        </p>
-        <div class="tags">
-            {{ with .content.Params.topics }}
-            {{ with $.content.Site.GetPage ( path.Join "/topics" (. | urlize)) }}
-            <a href="{{ .Permalink }}" class="tag card-header-icon is-primary is-medium">{{ .Title }}</a>
-            {{ end }}
-            {{ end }}
+<section class="section">
+    <div class="card">
+        <header class="card-header">
+            <p class="card-header-title">
+                <a href="{{ .content.Permalink }}">{{ .content.Title }}</a>
+            </p>
+            <div class="tags">
+                {{ with .content.Params.topics }}
+                {{ with $.content.Site.GetPage ( path.Join "/topics" (. | urlize)) }}
+                <a href="{{ .Permalink }}" class="tag card-header-icon is-primary is-medium">{{ .Title }}</a>
+                {{ end }}
+                {{ end }}
+            </div>
+        </header>
+        <div class="card-content">
+            {{ partial "keyword-line" (dict "content" .content "tohighlight" .tohighlight) }}
+            {{ partial "tag-line" . }}
+            <div class="content">
+                {{ .content.Summary}}
+            </div>
         </div>
-    </header>
-    <div class="card-content">
-        {{ partial "keyword-line" (dict "content" .content "tohighlight" .tohighlight) }}
-        {{ partial "tag-line" . }}
-        <div class="content">
-            {{ .content.Summary}}
-        </div>
+        <footer class="card-footer">
+            <a href="{{ .Permalink }}" class="card-footer-item">Open</a>
+            {{ partial "edit-button.html" (dict "content" .content "linktext" "Edit" "link_class" "card-footer-item") }}
+            <a href="#" class="card-footer-item">Copy ID</a>
+        </footer>
     </div>
-    <footer class="card-footer">
-        <a href="{{ .Permalink }}" class="card-footer-item">Open</a>
-        {{ partial "edit-button.html" (dict "content" .content "linktext" "Edit" "link_class" "card-footer-item") }}
-        <a href="#" class="card-footer-item">Copy ID</a>
-    </footer>
-</div>
+</section>
