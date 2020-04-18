@@ -35,6 +35,23 @@
             </a>
             {{ end }}
 
+            {{ with .Site.Menus.menu_more }}
+            <div class="navbar-item has-dropdown is-hoverable">
+                <a class="navbar-link">
+                    more
+                </a>
+
+                <div class="navbar-dropdown">
+                    {{ range . }}
+                    <a class="navbar-item {{ if $currentPage.IsMenuCurrent "menu_more" . }}is-active{{ end }}"
+                        href="{{ .URL }}">
+                        {{ .Title }}
+                    </a>
+                    {{ end }}
+                </div>
+            </div>
+            {{ end }}
+
             <div class="navbar-item has-dropdown is-hoverable">
                 <a class="navbar-link is-arrowless">
                     {{partial "fa-icon" (dict "icon" "brands/twitter" "alt" "Twitter")}}

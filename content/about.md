@@ -1,6 +1,6 @@
 ---
 title: Impressum
-menu: main
+menu: menu_more
 weight: 910
 ---
 
