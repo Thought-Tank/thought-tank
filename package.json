@@ -22,6 +22,7 @@
     "autoprefixer": "^9.7.6",
     "bulma": "^0.8.1",
     "bulmaswatch": "^0.8.0",
+    "clipboard": "^2.0.6",
     "postcss-cli": "^7.1.0"
   },
   "BUILD_TIME_EXPENSIVE_AS_LARGE_dependencies": {
