@@ -1,7 +1,8 @@
-{{/* $script := .Site.Data.webpack.main }}
-{{ with $script.js }}
-  <script src="{{ relURL . }}"></script>
-{{ end */}}
+{{ $clipboardjs:= resources.Get "js/clipboard.min.js" }}
+<script src="{{ $clipboardjs.RelPermalink }}"></script>
+<script type="text/javascript">
+  new ClipboardJS('.btn');
+</script>
 
 <script type="text/javascript">
   document.addEventListener('DOMContentLoaded', () => {
