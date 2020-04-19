@@ -4,7 +4,20 @@
     <div class="container">
         <h1 class="title is-1">{{ .Title }}</h1>
 
-        {{ partial "edit-button.html" (dict "content" . ) }}
+        <buttons class="is-right">
+            {{ if not .Params.lock }}
+            <a class="button is-primary is-outlined is-small" href="/admin/#/edit/notes/{{ .Params.id }}">
+                {{partial "fa-icon" (dict "icon" "regular/edit")}}
+                <span>Edit</span>
+            </a>
+            {{ end }}
+
+            <button class="button is-primary is-outlined is-small btn"
+                data-clipboard-text="[#](/note/{{ .Params.id }}/{{ .Title | urlize}}/)">
+                {{partial "fa-icon" (dict "icon" "regular/copy")}}
+                <span>Copy Link</span>
+            </button>
+        </buttons>
 
         {{ partial "keyword-line.html" (dict "content" . "tohighlight" .Params.keywords ) }}
 
