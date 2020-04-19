@@ -18,10 +18,9 @@
     </div>
 </section>
 
-
 {{/* In a render hook we add class="note-link" to all valid note links */}}
 {{ $linked_ids := slice }}
-{{ range findRE "<a .*? class=\".*?note-link.*?\".*>.*?</a>" .Content }}
+{{ range findRE "<a .*class=\".*note-link.*\".*>.*</a>" (print .Content .Summary) }}
 {{ $linked_ids = $linked_ids | append (index (findRE "href=\".*?\"" .) 0 | findRE "[[:digit:]]{16}") }}
 {{ end}}
 
