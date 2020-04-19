@@ -4,8 +4,12 @@
             {{ if not .IsHome }}
             {{partial "fa-icon" (dict "icon" "solid/chevron-left" "alt" "Back" "class" "is-medium has-text-primary")}}
             {{ end }}
+            {{ $logo := resources.Get (printf "svg/%s.svg" "thought-tank-logo-small")  | resources.Minify }}
+            <span class="icon">
+                <img class="icon" src="{{ $logo.RelPermalink }}">
+            </span>
             <p class="title">
-                Thought Tank
+                {{ .Site.Title}}
             </p>
         </a>
         <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false"
