@@ -58,7 +58,7 @@
 {{ end }}
 {{ end }}
 
-{{ with index .Site.Data.backlinks .Params.id }}
+{{ with index .Site.Data.backlinks (strings.TrimRight "/" .RelPermalink) }}
 
 {{/* TODO remove duplicates */}}
 <section class="section">
