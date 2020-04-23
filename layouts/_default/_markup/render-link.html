@@ -20,12 +20,6 @@
 {{- $title := .Title -}}
 {{- $class_attr := "" -}}
 
-{{/* Shortest form is no path and id in text field */}}
-{{- if eq (len $destination) 0 -}}
-{{- $destination = $text -}}
-{{- $text = "" -}}
-{{- end -}}
-
 {{/* just links to own host (or missing host information) */}}
 {{- $url := (urls.Parse $destination) -}}
 {{- if or (eq $url.Host "") (eq $url.Host ( urls.Parse .Page.Site.Params.baseURL ).Host ) -}}
@@ -34,8 +28,7 @@
 {{- if findRE "^/?(notes/)?([[:digit:]]{16})" $url.Path -}}
 
 {{/* just if note with given id exists */}}
-{{- $note_id := index (findRE "[[:digit:]]{16}" $url.Path) 0 -}}
-{{- $note_page := .Page.Site.GetPage (path.Join "/notes" $note_id) -}}
+{{- $note_page := .Page.Site.GetPage .Destination -}}
 {{- if $note_page -}}
 {{- $destination = $note_page.RelPermalink -}}
 {{- with .Page.Site.Params.appendTitleToNotesUrl -}}
