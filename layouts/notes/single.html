@@ -12,8 +12,9 @@
             </a>
             {{ end }}
 
+            {{ $link:= printf "[#](/notes/%s \"%s\")" .Params.id .Title }}
             <button class="button is-primary is-outlined is-small btn"
-                data-clipboard-text="[#](/note/{{ .Params.id }}/{{ .Title | urlize}}/)">
+                data-clipboard-text="{{$link}}">
                 {{partial "fa-icon" (dict "icon" "regular/copy")}}
                 <span>Copy Link</span>
             </button>
