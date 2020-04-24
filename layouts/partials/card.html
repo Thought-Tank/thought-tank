@@ -20,7 +20,7 @@
             </div>
         </div>
         <footer class="card-footer">
-            <a href="{{ .Permalink }}" class="card-footer-item">Open</a>
+            <a href="{{ partial "relPermalinkWithTitle" .content }}" class="card-footer-item">Open</a>
             {{ partial "edit-button.html" (dict "content" .content "linktext" "Edit" "link_class" "card-footer-item") }}
             <a href="#" class="card-footer-item">Copy ID</a>
         </footer>
