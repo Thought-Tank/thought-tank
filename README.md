@@ -1,149 +1,19 @@
 # Thought Tank
 
-Dieses Repository beschreibt eine _Architektur_ für die Speicherung von Notizen/Gedanken und _Prozesse_ für deren Verwaltung.
-Primäres Ziel ist es, mit minimalem Aufwand die maximale technische Kontrolle über das eigene verschriftliche Gedankengut zu haben.
-Darüber hinaus wollen wir dieses Gedankengut mit dem größten möglichen Komfort weiterentwickeln.  
-Zu diesem Zweck geben wir konkrete Hinweise zur Einrichtung dieser Architektur.
-Zudem stellen wir Tools und Techniken vor, die auf der Grundlage der Architektur die Prozesse unterstützen.
+## Quicklinks
+See a demo at [https://thought-tank.netlify.app]().
 
-Die Hoffnung ist, dass langfristig eine Ecosystem entsteht in dem unterschiedliche Tools die unterschiedlichen Bedürfnisse der Benutzer in den unterschiedlichen Prozessschritten befriedigen.
+This is core behind Thought Tank. To create your own Zettelkasten and easily host it a [Netlify](https://netlify.com), fork the repostory [Thought-Tank/one-click-netlify-ThoughtTank](https://github.com/Thought-Tank/one-click-netlify-ThoughtTank)
 
-Herausforderung: Was an der ursprünglichen Zettelkastenmethode ist essentiell, was der damaligen Zeit in dem Medium geschuldet?
+## Our Vision
+Thought Tank a Zettelkasten for the web.
 
-Zettel (in Abteilungen gegliedert, 11 bei Luhmann)
-Bibliographie, mit Exzerpt
-Schlagwortregister
+The system not only supports the storage and management of your thoughts and ideas. It also helps you to connect these thoughts and let new thoughts and insights arise from them. It also encourages you to continuously improve.
 
-Expliziter Unterschied zwischen Exzerpieren und Verzetteln
+**We make your own mind the smartest discussion partner for your thoughts.**
 
-Lesen und Exzerpieren im Hinblick auf das Verzetteln (Kontextieren). Entscheidend ist, was für welche anderen Zettel verwendbar ist.
+## Our Values
 
-Entscheidend ist die interne Anschlussfähigkeit. Das Rückwärtsverzetteln hebt die Bedeutung des Verzettelten hervor. Man findet es häufiger. Allerdings wird die Bedeutung nicht durch pures Betrachten des Zettels deutlich, sondern durch die Häufigkeit mit der man über ihn stolpert.
+In contrast to other solutions, you decide who stores and processes your thoughts. You can change this at any time. Thereby the entire history of your thoughts is preserved. And should you one day no longer want to use ThoughtTank, your notes are still available as plain text files (markdown).
 
-Ad hoc Notizen sind bei Luhmann auch eine Abteilung.
-
-Ein Zettel muss nur an der vorherigen anschließen, ob er noch zum Oberthema passt ist irrelevant. Es ist also keine systematische Ordnung => Folge: Mehrfachablage
-
- Sammelverweise/Hubs
- Und Schlagwortregister (keine Vollständigkeit der Fundstellen, sondern nur Einstiegspunkte) 
-
-Für die internen Verweise gibt es keine Stop-Kriterien
-
-## Details
-
-### Warum Digital statt eines richtigen Zettelkastens?
-
-Die meiste Informationsaufnahme findest bereits mit digitalen Medien statt.
-
-Ein digitales Eingabegerät ist immer zur Hand.
-
-### Warum Prozesse?
-
-Die Prozesse beeinflussen die Eignung der Tools. 
-Die Tools bestimmen die Eignung der Architektur.
-
-### Warum keine existierenden Webanwendungen?
-Beispielhafte Implementierungen sind:
-- Roam
-- World...
-- Zettelkasten
-
-### Warum so viele Tools?
-
-Die Geschmäcker sind verschieden. 
-Manchmal sind es auch nur die verwendete Betriebssysteme.
-Einzelne Programmautoren können die Lust an der Programmierung ihrer Anwendung verlieren.
-Alles dieses sind Gründe möglichst viele Anwendungen zu unterstützen.
-
-Wir wollen zudem ein Ökosystem sein, um das herum langfristig tolle Tools entstehen.
-Zunächst ist da jedoch das Henne-Ei-Problem.
-Ohne Tools kein Ökosystem, ohne Ökosystem keinen entstehenden Tools.
-Dieses Problem versuchen wir zu durchbrechen, indem wir beim Architekturdesign versuchen, durch eine kritische Menge existierende Tools bereits verwendbar zu sein.
-
-Vermutlich ist keines der Tools optimal.
-vermutlich braucht es in unterschiedlichen Prozessschritten unterschiedliche Tools.
-Es sollte jedoch für jeden Arbeits-/Prozessschritte eine adequate Toolunterstützung vorhanden sein.
-
-## Process
-
-### Erfassung
-
-#### Fleeting Notes
-
-Egal ob ein Gedanke beim Zähneputzen, ein Argument in der Diskussion oder eine interessanten Textpassagen beim Lesen, erst einmal wollen wir die Informationen schnell erfassen.
-Dieses soll geschehen, ohne den aktuellen Kontext zu sehr zu störnen oder gar zu verlassen.
-
-#### Referenz Box
-Separates Verzeichnis
-Zwei Arten von Einträgen:
-- Referenz Notes: Referenz und kurze Zusammenfassung
-- Literature notes: Roh Ideen aus der Literatur (max 3 Sätze)
-
-Kontext:
-- Quelle
-- Textabschnitt innerhalb der Quelle
-
-### Transfer to Permanent Notes
-
-Idealerweise innerhalb eines Tages
-
-So kurz wie möglich
-
-Guiding Questions:
-- Wie erweitert ändert oder fordert eine neue Idee eine bereits existierende Idee heraus?
-- Wie passt sich die Idee in das bereits bekannt ein?
-- Kann es auch andere Erklärungen für diese Zusammenhang geben?
-- Was bedeutet x für y?
-- Wie lässt sich dieses nutzen, um z zu erklären?
-
-Referenz behalten, Notiz löschen/archivieren
-
-### Linking
-
-### Register/Index
-
-@toRegister
-
-Alphabetisch (Keyword)
-
-Ontologie
-
-Keywords: Beziehen sich nicht auf die einzelne. Notiz, sondern auf den Kontext, in dem ich eine Notiz wiederfinden möchte
-
-### Sequenzen erstellen
-
-Um daraus eigene Artikel abzuleiten
-
-
-
-
-## Architecture
-### Verzeichnisstruktur
-/.config für Tools spezifische Konfiguration
-/_* Dateien für nicht zu synchronisierende Dateien und Verzeichnisse der Tools
-
-### Einordnen in einen Kontext
-Was steht davor, was danach?
-Bei Luhmann ID System
-### Tagging
-Über spezielle Notes (mit Tag @Register)
-Dieses ermöglicht es der Zuordnung zu dem Tag mehr Kontext zu geben
-
-Sollen die Notes eine eigene Inbox bekommen?
-
-#### Process Stage Taging
-
-
-### Referenzmanager
-
-
-### Tools config Verzeichnis 
-
-## Tools
-
-Aus Kindle oder iBooks vielleicht via Readwise.io
-
-### Webbasierter Zugriff
-Wiki.js
-Gollum
-Gitit
+**Your thoughts are yours.** 
