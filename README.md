@@ -1,7 +1,7 @@
 # Thought Tank
 
 ## Quicklinks
-See a demo at [https://thought-tank.netlify.app]().
+See a demo at [https://thought-tank.netlify.app](https://thought-tank.netlify.app).
 
 This is core behind Thought Tank. To create your own Zettelkasten and easily host it a [Netlify](https://netlify.com), fork the repostory [Thought-Tank/one-click-netlify-ThoughtTank](https://github.com/Thought-Tank/one-click-netlify-ThoughtTank)
 
