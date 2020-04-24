@@ -21,8 +21,10 @@
         </div>
         <footer class="card-footer">
             <a href="{{ partial "relPermalinkWithTitle" .content }}" class="card-footer-item">Open</a>
+            {{/* Assemble MD link */}}
             {{ partial "edit-button.html" (dict "content" .content "linktext" "Edit" "link_class" "card-footer-item") }}
-            <a href="#" class="card-footer-item">Copy ID</a>
+            {{ $link:= printf "[#](/notes/%s \"%s\")" .content.Params.id .content.Title }}
+            <a class="card-footer-item btn" data-clipboard-text="{{$link}}">Copy Link</a>
         </footer>
     </div>
 </section>
