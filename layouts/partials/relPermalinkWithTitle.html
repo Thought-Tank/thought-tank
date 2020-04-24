@@ -1,0 +1,1 @@
+{{ .RelPermalink | cond (.Page.Site.Params.appendTitleToNotesUrl | default false) (path.Join .RelPermalink (urlize .Title)) }}
