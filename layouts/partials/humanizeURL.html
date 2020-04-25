@@ -3,4 +3,4 @@
     However your server needs to support rewirting this url
     Therefore you can set appending of the title in your params
     */}}
-{{- .linkTo.RelPermalink | cond (.Site.Params.appendTitleToNotesUrl | default false) (path.Join .linkTo.RelPermalink (urlize .linkTo.Title)) -}}
+{{- .linkTo.RelPermalink | cond ( .shouldHumanizeUrl | default false) (path.Join .linkTo.RelPermalink (urlize .linkTo.Title)) -}}

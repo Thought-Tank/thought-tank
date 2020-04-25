@@ -3,7 +3,7 @@
     
     <ul>
         {{ range (where $.Page.Site.RegularPages "Section" "notes").ByLastmod.Reverse | first ( .Get "limit" | default 5) }}
-        <li><a href="{{ partial "humanizeURL" (dict "linkTo" . "Site.Params" .Site.Params) }}">{{ .Title }}</a> ({{.Lastmod.Format "January 2, 2006" }})</li>
+        <li><a href="{{ partial "humanizeURL" (dict "linkTo" . "shouldHumanizeUrl" .Site.Params.appendTitleToNotesUrl ) }}">{{ .Title }}</a> ({{.Lastmod.Format "January 2, 2006" }})</li>
         {{ end }}
     </ul>
     
