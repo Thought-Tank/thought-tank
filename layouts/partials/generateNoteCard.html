@@ -2,7 +2,7 @@
     <div class="card">
         <header class="card-header">
             <p class="card-header-title">
-                <a href="{{ .notepage.Permalink }}">{{ .notepage.Title }}</a>
+                <a href="{{ partial "humanizeURL" (dict "linkTo" .notepage "siteContext" .siteContext ) }}">{{ .notepage.Title }}</a>
             </p>
             <div class="tags">
                 {{ with .notepage.Params.topics }}
