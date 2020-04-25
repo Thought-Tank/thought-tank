@@ -54,7 +54,7 @@
 </section>
 
 {{ range . }}
-{{ partial "generateNoteCard.html" (dict "notepage" . "tohighlight" $.Params.keywords ) }}
+{{ partial "generateNoteCard.html" (dict "notepage" . "tohighlight" $.Params.keywords "siteContext" $.Site ) }}
 {{ end }}
 {{ end }}
 
@@ -68,7 +68,7 @@
 </section>
 {{ range . }}
 {{ $referring_page := $.Site.GetPage (path.Join "/notes" (index . "from"))}}
-{{ partial "generateNoteCard.html" (dict "notepage" $referring_page "tohighlight" $.Params.keywords ) }}
+{{ partial "generateNoteCard.html" (dict "notepage" $referring_page "tohighlight" $.Params.keywords "siteContext" $.Site ) }}
 {{ end }}
 {{ end }}
 
@@ -81,7 +81,7 @@
     </div>
 </section>
 {{ range . }}
-{{ partial "generateNoteCard.html" (dict "notepage" . "tohighlight" $.Params.keywords ) }}
+{{ partial "generateNoteCard.html" (dict "notepage" . "tohighlight" $.Params.keywords "siteContext" $.Site) }}
 {{ end }}
 {{ end }}
 

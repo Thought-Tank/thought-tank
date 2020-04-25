@@ -26,7 +26,7 @@
   </div>
 </section>
 {{ range .ByTitle }}
-{{ partial "generateNoteCard.html" (dict "notepage" .) }}
+{{ partial "generateNoteCard.html" (dict "notepage" . "siteContext" $.Site ) }}
 {{ end }}
 {{ end }}
 
@@ -42,7 +42,7 @@
 {{end}}
 
 {{ range . }}
-{{ partial "generateNoteCard.html" (dict "notepage" .) }}
+{{ partial "generateNoteCard.html" (dict "notepage" . "siteContext" $.Site ) }}
 {{ end }}
 {{ end }}
 
