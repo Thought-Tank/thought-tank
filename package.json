@@ -1,6 +1,6 @@
 {
   "name": "thought-tank",
-  "version": "0.17.2",
+  "version": "0.17.3",
   "description": "Template File of ThoughtTank to be installed via npm",
   "main": "index.js",
   "scripts": {
