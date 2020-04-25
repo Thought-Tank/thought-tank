@@ -1,4 +1,5 @@
 {{ if not .content.Params.lock }}
-<a href="/admin/#/edit/notes/{{ .content.Params.id }}"
+{{ $editBase := "/admin/#/edit" }}
+<a href="{{path.Join $editBase .content.RelPermalink }}"
 {{- with .link_class }} class="card-footer-item"{{end}}>{{ .linktext | default "(edit)"}}</a>
 {{ end }}
