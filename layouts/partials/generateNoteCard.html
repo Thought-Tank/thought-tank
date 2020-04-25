@@ -20,7 +20,7 @@
             </div>
         </div>
         <footer class="card-footer">
-            <a href="{{ partial "humanizeURL" (dict "linkTo" .notepage "shouldHumanizeUrl" .siteContext.Params.appendTitleToNotesUrl ) }}" class="card-footer-item">Open</a>
+            <a href="{{ partial "humanizeURL" (dict "linkTo" .notepage "siteContext" .siteContext ) }}" class="card-footer-item">Open</a>
             {{/* Assemble MD link */}}
             {{ partial "edit-button.html" (dict "content" .notepage "linktext" "Edit" "link_class" "card-footer-item") }}
             {{ $link:= printf "[#](/notes/%s \"%s\")" .notepage.Params.id .notepage.Title }}

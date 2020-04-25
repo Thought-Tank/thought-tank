@@ -94,7 +94,7 @@
 </section>
 {{ range . }}
 {{ with $.Site.GetPage (path.Join "/references" .id) }}
-<a href="{{ partial "humanizeURL" (dict "linkTo" . "shouldHumanizeUrl" .Site.Params.appendTitleToNotesUrl) }}">{{ with .Params.authors }}{{ delimit . ", " " & "}}: {{ end }}{{.Title}}</a><br>
+<a href="{{ partial "humanizeURL" (dict "linkTo" . "siteContext" .Site) }}">{{ with .Params.authors }}{{ delimit . ", " " & "}}: {{ end }}{{.Title}}</a><br>
 {{ .Summary }}
 {{ end }}
 {{ end }}
