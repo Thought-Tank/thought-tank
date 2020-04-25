@@ -1,9 +1,9 @@
 {{- /* Keywords a linked to keyword pages, some could be highlighted */ -}}
-{{ with .content.Params.keywords }}
+{{ with .notepage.Params.keywords }}
 <div class="tags">
     {{ range . | sort }}
     {{- $term := . }}
-    {{- with $.content.Site.GetPage (printf "/keywords/%s" ($term | urlize)) -}}
+    {{- with $.notepage.Site.GetPage (printf "/keywords/%s" ($term | urlize)) -}}
     <a href="{{ .Permalink }}" class="tag is-link{{ with not (in $.tohighlight $term) }} is-light{{ end }}">
         {{ .LinkTitle }}
     </a>

@@ -2,28 +2,28 @@
     <div class="card">
         <header class="card-header">
             <p class="card-header-title">
-                <a href="{{ .content.Permalink }}">{{ .content.Title }}</a>
+                <a href="{{ .notepage.Permalink }}">{{ .notepage.Title }}</a>
             </p>
             <div class="tags">
-                {{ with .content.Params.topics }}
-                {{ with $.content.Site.GetPage ( path.Join "/topics" (. | urlize)) }}
+                {{ with .notepage.Params.topics }}
+                {{ with $.notepage.Site.GetPage ( path.Join "/topics" (. | urlize)) }}
                 <a href="{{ .Permalink }}" class="tag card-header-icon is-primary is-medium">{{ .Title }}</a>
                 {{ end }}
                 {{ end }}
             </div>
         </header>
         <div class="card-content">
-            {{ partial "keyword-line" (dict "content" .content "tohighlight" .tohighlight) }}
+            {{ partial "keyword-line" (dict "notepage" .notepage "tohighlight" .tohighlight) }}
             {{ partial "tag-line" . }}
             <div class="content">
-                {{ .content.Summary}}
+                {{ .notepage.Summary}}
             </div>
         </div>
         <footer class="card-footer">
-            <a href="{{ partial "relPermalinkWithTitle" .content }}" class="card-footer-item">Open</a>
+            <a href="{{ partial "relPermalinkWithTitle" .notepage }}" class="card-footer-item">Open</a>
             {{/* Assemble MD link */}}
-            {{ partial "edit-button.html" (dict "content" .content "linktext" "Edit" "link_class" "card-footer-item") }}
-            {{ $link:= printf "[#](/notes/%s \"%s\")" .content.Params.id .content.Title }}
+            {{ partial "edit-button.html" (dict "content" .notepage "linktext" "Edit" "link_class" "card-footer-item") }}
+            {{ $link:= printf "[#](/notes/%s \"%s\")" .notepage.Params.id .notepage.Title }}
             <a class="card-footer-item btn" data-clipboard-text="{{$link}}">Copy Link</a>
         </footer>
     </div>
