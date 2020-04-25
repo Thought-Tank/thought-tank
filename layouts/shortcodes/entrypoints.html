@@ -9,7 +9,7 @@
     {{ end }}
     <ul>
         {{ range (.Pages | first ( $.Get "limit" | default 5)) }}
-        <li><a href="{{ partial "relPermalinkWithTitle" . }}">{{ .Title }}</a></li>
+        <li><a href="{{ partial "humanizeURL" (dict "linkTo" . "Site.Params" .Site.Params) }}">{{ .Title }}</a></li>
         {{ end }}
     </ul>
     {{ end }}

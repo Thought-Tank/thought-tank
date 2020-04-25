@@ -26,7 +26,7 @@
         {{ range $.format }}
         <td>{{ index $data .colValue }}</td>
         {{ end }}
-        <td><a href="{{ partial "relPermalinkWithTitle" $note }}">{{ $note.Title }}</a></td>
+        <td><a href="{{ partial "humanizeURL" (dict "linkTo" $note "Site.Params" .Site.Params) }}">{{ $note.Title }}</a></td>
         <td><a href="/admin/#/edit/notes/{{ $note.Params.id }}">edit</a></td>
     </tr>
     {{ end }}
