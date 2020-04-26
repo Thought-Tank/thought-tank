@@ -1,3 +1,5 @@
-{{ $data:= sort (where (partialCached "getNoteStats" . ) ".incomingLinks" "le" 2) ".incomingLinks" }}
+{{ $threshold := .Get "threshold" | default 1 | int }}
+
+{{ $data:= sort (where (partialCached "getNoteStats" . ) ".incomingLinks" "le" $threshold ) ".incomingLinks" }}
 
 {{ partial "uniformFlowTable" (dict "format" (slice (dict "colTitle" "Linked by" "colValue" "incomingLinks")) "data" $data "global" . ) }}
