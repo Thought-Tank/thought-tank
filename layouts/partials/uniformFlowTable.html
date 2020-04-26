@@ -1,4 +1,4 @@
-{{/* With parameter format data contains additional Information to print */}}
+{{/* With parameter format data contains additional information to print */}}
 
 <table class="table is-striped is-fullwidth">
     <thead>
@@ -31,6 +31,6 @@
     </tr>
     {{ end }}
     {{ else }}
-    <tr><td colspan="{{ add 2 (len $.format)}}" align="center">{{ emojify ":thumbsup: congrats, nothing to do here" }}</td></tr>
+    <tr><td colspan="{{ add 2 ($.format | default slice | len )}}" align="center">{{ emojify ":thumbsup: congrats, nothing to do here" }}</td></tr>
     {{ end }}
 </table>
