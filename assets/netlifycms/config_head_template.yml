@@ -2,4 +2,8 @@ backend:
   name: {{ .Site.Params.backend.name }}
   repo: {{ .Site.Params.backend.repo }}
   branch: {{ .Site.Params.backend.branch }}
+  commit_messages:
+    create: Create {{print "{{collection}}"}} "{{print "{{slug}}"}}"
+    update: Update {{print "{{collection}}"}} "{{print "{{slug}}"}}"
+    delete: Delete {{print "{{collection}}"}} "{{print "{{slug}}"}}"
 
