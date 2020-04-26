@@ -1,9 +1,6 @@
 <nav class="navbar is-fixed-top" role="navigation" aria-label="main navigation">
     <div class="navbar-brand">
         <a class="navbar-item" href="{{ .Site.BaseURL }}/">
-            {{ if not .IsHome }}
-            {{partial "fa-icon" (dict "icon" "solid/chevron-left" "alt" "Back" "class" "is-medium has-text-primary")}}
-            {{ end }}
             {{ $logo := resources.Get (printf "svg/%s.svg" "thought-tank-logo-small")  | resources.Minify }}
             <span class="icon">
                 <img class="icon" src="{{ $logo.RelPermalink }}">
