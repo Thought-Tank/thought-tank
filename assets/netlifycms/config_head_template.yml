@@ -1,3 +1,9 @@
+site_url: {{.Site.Home.Permalink}}
+display_url: {{.Site.Home.Permalink}}
+
+{{ $logo := resources.Get (printf "svg/%s.svg" "thought-tank-logo-color")  | resources.Minify }}
+logo_url: {{ $logo.Permalink }}
+
 backend:
   name: {{ .Site.Params.backend.name }}
   repo: {{ .Site.Params.backend.repo }}
