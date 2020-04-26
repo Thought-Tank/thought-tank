@@ -1,3 +1,4 @@
+{{/* Just notes become listed */}}
 {{ define "main" }}
 
 <section class="section">
@@ -16,7 +17,8 @@
 {{ end }}
 
 {{/* Show entrypoints into topic first */}}
-{{ $notesEntryPoints := intersect .Pages (($.Site.GetPage "tags").Data.Terms.Get "entrypoint").Pages }}
+{{ $allNotes := where .Pages "Section" "notes" }}
+{{ $notesEntryPoints := where $allNotes "Params.tags" "intersect" (slice "entrypoint") }}
 
 {{ with $notesEntryPoints }}
 <section class="section">
@@ -30,7 +32,7 @@
 {{ end }}
 {{ end }}
 
-{{ $notesBesideEntryPoints := .Pages.ByTitle | complement $notesEntryPoints }}
+{{ $notesBesideEntryPoints := $allNotes | complement $notesEntryPoints }}
 {{ with $notesBesideEntryPoints }}
 {{with $notesEntryPoints}}
 <section class="section">
@@ -41,7 +43,7 @@
 </section>
 {{end}}
 
-{{ range . }}
+{{ range .ByTitle }}
 {{ partial "generateNoteCard.html" (dict "notepage" . "siteContext" $.Site ) }}
 {{ end }}
 {{ end }}
