@@ -1,0 +1,34 @@
+{{ $threshold := .Get "threshold" | default 1 | int }}
+
+{{/* Prepare Data: Check backlinks for used title */}}
+{{ $outdated_list := slice }}
+{{ range $to, $links := $.Site.Data.backlinks  }}
+{{ with $.Site.GetPage $to }}
+{{ $to_page := . }}
+{{ range $link := $links}}
+{{ if ne $to_page.Title $link.title }}
+{{/* Link title does not match page title */}}
+{{ $outdated_list = $outdated_list | append (dict "toPage" $to_page "from" $link.from "outdatedTitle" $link.title) }}
+{{ end }}
+{{ end }}
+{{ end }}
+{{ end }}
+
+
+{{/* Print Data */}}
+{{ with $outdated_list }}
+<ul>
+    {{ range . }}
+    {{ $outdated := . }}
+    {{ with $.Site.GetPage ( path.Join "notes" $outdated.from ) }}
+    <li>
+        Note <a href="{{.RelPermalink}}">{{.Title}}</a> (id: {{.Params.id}})
+        refers to <a href="{{$outdated.toPage.RelPermalink}}">{{$outdated.toPage.Title}}</a> (id:
+        {{$outdated.toPage.Params.id}}) using title "{{$outdated.outdatedTitle}}"
+    </li>
+    {{ end }}
+    {{ end }}
+</ul>
+    {{ else }}
+    Congratulations, noting to do here.
+{{ end }}
