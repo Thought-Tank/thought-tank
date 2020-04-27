@@ -1,15 +1,17 @@
 {{ define "main" }}
-<h1 class="title is-1">List of {{ .Title }}</h1>
-
-<div class="field is-grouped is-grouped-multiline">
-    {{ range .Data.Terms.Alphabetical }}
-    <div class="control">
-        <a class="tags has-addons" href="{{ .Page.Permalink }}">
-            <span class="tag is-primary">{{ .Term }}</span>
-            <span class="tag is-dark"> {{ .Count }}</span>
-        </a>
+<section class="section">
+    <h1 class="title is-1">List of {{ .Title }}</h1>
+    
+    <div class="field is-grouped is-grouped-multiline">
+        {{ range .Data.Terms.Alphabetical }}
+        <div class="control">
+            <a class="tags has-addons" href="{{ .Page.Permalink }}">
+                <span class="tag is-primary">{{ .Term }}</span>
+                <span class="tag is-dark"> {{ .Count }}</span>
+            </a>
+        </div>
+        {{ end }}
     </div>
-    {{ end }}
-</div>
+</section>
 
 {{ end }}
