@@ -3,7 +3,7 @@
         <a class="navbar-item" href="{{ .Site.BaseURL }}/">
             {{ $logo := resources.Get (printf "svg/%s.svg" "thought-tank-logo-small")  | resources.Minify }}
             <span class="icon">
-                <img class="icon" src="{{ $logo.RelPermalink }}">
+                <img class="icon" src="{{ $logo.RelPermalink }}" alt="logo">
             </span>
             <p class="title">
                 {{ .Site.Title}}
