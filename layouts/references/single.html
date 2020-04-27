@@ -1,0 +1,30 @@
+{{ define "main" }}
+
+<section class="section">
+  <div class="container">
+    <h1 class="title is-1">{{ .Title }}</h1>
+    {{ with .Params.authors }}
+    <h2 class="subtitle is-4">{{ delimit . ", " " & " }}</h2>
+    {{ end }}
+
+    <dl>
+      <dt><strong>Source</strong></dt>
+      <dd><a href="{{ .Params.link }}">{{ .Params.link }}</a></dd>
+      <dt><strong>Summary</strong></dt>
+      <dd>
+        <div class="content">
+          {{ .Content }}
+        </div>
+      </dd>
+      {{ with .Params.bibliography }}
+      <dt><strong>Bibliographic Details</strong></dt>
+      <dd>
+        <code>
+          {{ . }}
+        </code>
+      </dd>
+      {{ end }}
+    </dl>
+  </div>
+</section>
+{{ end }}

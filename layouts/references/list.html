@@ -1,0 +1,18 @@
+{{ define "main" }}
+
+<section class="section">
+  <div class="container">
+    <h1 class="title is-1">{{ .Title }}</h1>
+
+    {{ with .Pages }}
+    {{ range . }}
+    <h2 class="title is-2"><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
+
+    {{ .Content }}
+    {{ end }}
+    {{ else }}
+    No literature yet. You might want to add some references.
+    {{ end }}
+  </div>
+</section>
+{{ end }}
