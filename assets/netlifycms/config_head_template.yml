@@ -7,7 +7,7 @@ logo_url: {{ $logo.Permalink }}
 backend:
   name: {{ .Site.Params.backend.name | default "github"}}
   {{/* Netlify Repository environment variable comes with protocol and domain */}}
-  repo: {{ (urls.Parse .Site.Params.backend.repo).Path | strings.TrimPrefix "git@github.com:" }}
+  repo: {{ (.Site.Params.backend.repo | strings.TrimPrefix "git@github.com:" | urls.Parse).Path }}
   branch: {{ .Site.Params.backend.branch }}
   commit_messages:
     create: Create {{print "{{collection}}"}} "{{print "{{slug}}"}}"
