@@ -1,5 +1,5 @@
 <div class="content">
-    {{ .Site.Params.author }}<br>
+    {{ with .Site.Params.author }}{{ . }}<br>{{ end }}
     
     {{ .Site.Params.about.address | safeHTML}}
 </div>

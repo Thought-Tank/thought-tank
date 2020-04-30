@@ -1,4 +1,5 @@
 <div class="content has-text-centered">
-    Zettelkasten made with <span class="has-text-success">{{ emojify ":heart:"}}</span> and <a href="https://github.com/Thought-Tank/thought-tank">ThoughtTank</a> by {{ .Site.Params.author }}.
-    <!--a href="/about">About/Impressum</a> | <a href="/privacy">Privacy Statement</a-->
+    Zettelkasten made with <span class="has-text-success">{{ emojify ":heart:"}}</span> 
+    and <a href="https://github.com/Thought-Tank/thought-tank">ThoughtTank</a>
+    {{ with .Site.Params.author }} by {{ . }}{{ end }}.
 </div>
