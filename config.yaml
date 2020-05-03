@@ -1,7 +1,3 @@
-baseURL: "http://example.org/"
-languageCode: "en-us"
-title: "My New Hugo Site"
-
 module:
   imports:
   - path: ../../node_modules/@fortawesome/fontawesome-free
@@ -16,6 +12,25 @@ module:
     mounts:
     - source: dist
       target: assets/js
+
+menu:
+  main:
+  - name: Notes 
+    weight: 10
+    pre: <i class='fas fa-2x fa-file-alt'></i>
+    url: /notes/
+  - name: Flow
+    weight: 30
+    pre: <i class='fas fa-2x fa-list-ul'></i>
+    url: /flow/
+  - name: Literature
+    weight: 20
+    pre: <i class='fas fa-2x fa-book'></i>
+    url: /references/
+  - name: Diary
+    weight: 40
+    pre: <i class='fas fa-2x fa-feather-alt'></i>
+    url: /diary/
 
   # also add netlifycms to package.json before activating (!Build time expensive)
   # - path: ../../node_modules/netlify-cms
