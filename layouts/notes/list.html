@@ -1,0 +1,30 @@
+{{ define "content"}}
+<div class="columns is-multiline">
+
+    {{/* Show entrypoints into topic first */}}
+    {{ $allNotes := where .Pages "Section" "notes" }}
+    {{ $notesEntryPoints := where $allNotes "Params.tags" "intersect" (slice "entrypoint") }}
+
+    {{ with $notesEntryPoints }}
+    {{ range .ByTitle }}
+    <div class="column is-one-third">
+        {{ partial "generateNoteCard.html" (dict "notepage" . "siteContext" $.Site ) }}
+    </div>
+    {{ end }}
+    {{ end }}
+
+    {{ $notesBesideEntryPoints := $allNotes | complement $notesEntryPoints }}
+    {{ with $notesBesideEntryPoints }}
+    {{ range .ByTitle }}
+    <div class="column is-one-third">
+        {{ partial "generateNoteCard.html" (dict "notepage" . "siteContext" $.Site ) }}
+    </div>
+    {{ end }}
+    {{ end }}
+
+</div>
+{{ end }}
+
+{{ define "list" }}
+{{ partial "panel-list/all-notes" . }}
+{{ end }}
