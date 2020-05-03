@@ -1,0 +1,15 @@
+{{ with .Params.references }}
+{{ range . }}
+{{ with $.Site.GetPage (path.Join "/references" .id) }}
+<a class="panel-block" href="{{ partial "humanizeURL" (dict "linkTo" . "siteContext" .Site) }}">
+    <span class="panel-icon">
+        <i class="fas fa-book"
+        aria-hidden="true"></i>
+    </span>
+    <span class="is-size-7">{{ .Title }}</span>
+</a>
+{{ end }}
+{{ end }}
+{{ else }}
+No reference for this note
+{{ end }}

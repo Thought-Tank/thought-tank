@@ -1,0 +1,48 @@
+{{/* In a render hook we add class="note-link" to all valid note links */}}
+{{ $linked_ids_out := slice -}}
+{{ range findRE "<a .*class=\".*note-link.*\".*>.*</a>" (print .Content .Summary) -}}
+{{ $linked_ids_out = $linked_ids_out | append (index (findRE "href=\".*?\"" .) 0 | findRE "[[:digit:]]{16}") -}}
+{{ end -}}
+
+{{ $linked_ids_in := slice -}}
+{{ range index .Site.Data.backlinks (strings.TrimRight "/" .RelPermalink) -}}
+{{ $linked_ids_in = $linked_ids_in | append .from -}}
+{{ end -}}
+
+
+{{ $linked_notes := slice -}}
+{{ range $linked_ids_in | append $linked_ids_out | uniq -}}
+{{ $linked_notes = $linked_notes | append ($.Site.GetPage (path.Join "/notes" .)) -}}
+{{ end -}}
+
+{{/* Do not list self references*/}}
+{{ $linked_notes = $linked_notes | complement (slice .) -}}
+
+{{ range $linked_notes -}}
+<a class="panel-block" href="{{ .RelPermalink }}">
+    <span class="panel-icon">
+        <i class="
+        {{ if and (in $linked_ids_in .Params.id) (in $linked_ids_out .Params.id) }}
+        fas fa-exchange-alt
+        {{ else if in $linked_ids_in .Params.id }}
+        fas fa-long-arrow-alt-right
+        {{ else }}
+        fas fa-long-arrow-alt-left
+        {{ end }}"
+        aria-hidden="true"></i>
+    </span>
+    <span class="is-size-7">{{ .Title }}</span>
+</a>
+{{ end }}
+
+{{- $related := (where (.Site.RegularPages.Related .) "Section" "notes") | complement $linked_notes | first 5 -}}
+
+{{ range $related -}}
+<a class="panel-block" href="{{ .RelPermalink }}">
+    <span class="panel-icon">
+        <i class="fas fa-brain"
+        aria-hidden="true"></i>
+    </span>
+    <span class="is-size-7">{{ .Title }}</span>
+</a>
+{{ end }}

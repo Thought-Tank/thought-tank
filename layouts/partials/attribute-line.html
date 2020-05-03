@@ -1,0 +1,17 @@
+{{ with .context.Params.Get .attribute }}
+<div class="field is-grouped is-grouped-multiline">
+    {{ range . | sort }}
+    {{- with $.context.GetPage (printf "/%s/%s" $.attribute ( . | urlize)) -}}
+    <div class="control">
+        <a class="tags has-addons" 
+            {{/* Just taxonomies provide linkable pages */}}
+            {{- with index $.context.Site.Taxonomies "tags"}}href="{{ .RelPermalink }}" {{ end -}}
+        >
+        <span class="tag is-primary">{{ .Title }}</span>
+            <!--span class="tag is-dark"> 1</span-->
+        </a>
+    </div>
+    {{ end }}
+    {{- end }}
+</div>
+{{ end }}
