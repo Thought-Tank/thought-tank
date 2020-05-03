@@ -2,17 +2,15 @@
     <div class="card">
         <header class="card-header">
             <p class="card-header-title">
-                <a href="{{ partial "humanizeURL" (dict "linkTo" .notepage "siteContext" .siteContext ) }}">{{ .notepage.Title }}</a>
-            </p>
-            <div class="tags">
                 {{ with .notepage.Params.topics }}
-                {{ with $.notepage.Site.GetPage ( path.Join "/topics" (. | urlize)) }}
-                <a href="{{ .Permalink }}" class="tag card-header-icon is-primary is-medium">{{ .Title }}</a>
+                {{ . }}
                 {{ end }}
-                {{ end }}
-            </div>
+            </p>
         </header>
         <div class="card-content">
+            <div class="title is-4">
+                <a href="{{ partial "humanizeURL" (dict "linkTo" .notepage "siteContext" .siteContext ) }}">{{ .notepage.Title }}</a>
+            </div>
             {{ partial "keyword-line" (dict "notepage" .notepage "tohighlight" .tohighlight) }}
             {{ partial "tag-line" . }}
             <div class="content">
