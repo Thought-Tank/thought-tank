@@ -13,8 +13,7 @@
             {{ end }}
 
             {{ $link:= printf "[#](/notes/%s \"%s\")" .Params.id .Title }}
-            <button class="button is-primary is-outlined is-small btn"
-                data-clipboard-text="{{$link}}">
+            <button class="button is-primary is-outlined is-small btn" data-clipboard-text="{{$link}}">
                 {{partial "fa-icon" (dict "icon" "regular/copy")}}
                 <span>Copy Link</span>
             </button>
@@ -32,73 +31,77 @@
     </div>
 </section>
 
-{{/* In a render hook we add class="note-link" to all valid note links */}}
-{{ $linked_ids := slice }}
-{{ range findRE "<a .*class=\".*note-link.*\".*>.*</a>" (print .Content .Summary) }}
-{{ $linked_ids = $linked_ids | append (index (findRE "href=\".*?\"" .) 0 | findRE "[[:digit:]]{16}") }}
-{{ end}}
 
-{{ $linked_notes := slice }}
-{{ range $linked_ids | uniq }}
-{{ $linked_notes = $linked_notes | append ($.Site.GetPage (path.Join "/notes" .)) }}
 {{ end }}
 
-{{/* Do not list self references*/}}
-{{ $linked_notes = $linked_notes | complement (slice .) }}
-
-{{ with $linked_notes }}
-<section class="section">
-    <div class="container">
-        <h2 class="title is-2">Linked Notes</h2>
+{{ define "info-panel" }}
+<nav class="panel is-shadowless">
+    <p class="panel-heading is-radiusless">
+        Note Info
+    </p>
+    <div class="tabs is-small">
+        <ul>
+            <li class="tab is-active" onclick="openTab(event,'connections')"><a>Connections</a></li>
+            <li class="tab" onclick="openTab(event,'taxonomies')"><a>Taxonomies</a></li>
+            <li class="tab" onclick="openTab(event,'references')"><a>References</a></li>
+            <li class="tab" onclick="openTab(event,'graph')"><a>Graph</a></li>
+        </ul>
     </div>
-</section>
-
-{{ range . }}
-{{ partial "generateNoteCard.html" (dict "notepage" . "tohighlight" $.Params.keywords "siteContext" $.Site ) }}
-{{ end }}
-{{ end }}
-
-{{ with index .Site.Data.backlinks (strings.TrimRight "/" .RelPermalink) }}
-
-{{/* TODO remove duplicates */}}
-<section class="section">
     <div class="container">
-        <h2 class="title is-2">Notes Linking this Note</h2>
+        <div id="connections" class="content-tab"> 
+            {{ partial "panel-info/related.html" . }}
+        </div>
+
+        <div id="taxonomies" class="content-tab" style="display:none">
+            {{ with .Params.topics }}
+            <p class="subtitle is-5">Topic</p>
+            <div class="content">{{ . }}</div>
+            {{ end }}
+
+            {{ with .Params.keywords }}<p class="subtitle is-5">Keywords</p>{{ end }}
+            {{ partial "attribute-line.html" (dict "context" . "attribute" "keywords" ) }}
+
+            {{ with .Params.tags }}<p class="subtitle is-5">Tags</p>{{ end }}
+            {{ partial "attribute-line.html" (dict "context" . "attribute" "tags" ) }}
+
+            {{ with .Params.flow }}<p class="subtitle is-5">Flow States</p>{{ end }}
+            {{ partial "attribute-line.html" (dict "context" . "attribute" "flow" ) }}
+        </div>
+
+        <div id="references" class="content-tab" style="display:none">
+            {{ partial "panel-info/references.html" . }}
+        </div>
+
+        <div id="graph" class="content-tab" style="display:none">
+            Not implemented yet
+        </div>
     </div>
-</section>
-{{ range . }}
-{{ $referring_page := $.Site.GetPage (path.Join "/notes" (index . "from"))}}
-{{ partial "generateNoteCard.html" (dict "notepage" $referring_page "tohighlight" $.Params.keywords "siteContext" $.Site ) }}
-{{ end }}
+</nav>
 {{ end }}
 
-{{ $related := (where (.Site.RegularPages.Related .) "Section" "notes") | complement $linked_notes | first 10 }}
-
-{{ with $related }}
-<section class="section">
-    <div class="container">
-        <h2 class="title is-2">Possibly related Notes</h2>
-    </div>
-</section>
-{{ range . }}
-{{ partial "generateNoteCard.html" (dict "notepage" . "tohighlight" $.Params.keywords "siteContext" $.Site) }}
-{{ end }}
-{{ end }}
-
-
-{{ with .Params.references }}
-<section class="section">
-    <div class="container">
-        <h2 class="title is-2">References</h2>
-    </div>
-</section>
-{{ range . }}
-{{ with $.Site.GetPage (path.Join "/references" .id) }}
-<a href="{{ partial "humanizeURL" (dict "linkTo" . "siteContext" .Site) }}">{{ with .Params.authors }}{{ delimit . ", " " & "}}: {{ end }}{{.Title}}</a><br>
-{{ .Summary }}
-{{ end }}
-{{ end }}
-{{ end }}
-
-
+{{ define "list" }}
+<!--panel-->
+<nav class="panel">
+    <p class="panel-heading is-radiusless">
+        List of Notes
+    </p>
+    <!--div class="panel-block">
+                <p class="control has-icons-left">
+                    <input class="input" type="text" placeholder="Search">
+                    <span class="icon is-left">
+                        <i class="fas fa-search" aria-hidden="true"></i>
+                    </span>
+                </p>
+            </div-->
+    {{ range where .Site.RegularPages "Section" "notes" }}
+    <a class="panel-block {{ if eq . $.Page }} is-active{{ end }}" href="{{ .RelPermalink }}">
+        <span class="panel-icon">
+            <i class="fas fa-file-alt" aria-hidden="true"></i>
+        </span>
+        <span class="is-size-7">
+            {{ .Title }}
+        </span>
+    </a>
+    {{ end }}
+</nav>
 {{ end }}

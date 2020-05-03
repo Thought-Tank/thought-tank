@@ -9,19 +9,109 @@
 </head>
 
 <body>
-  {{- partial "navbar.html" . -}}
+  <style>
+    html {
+      height: 100vh;
+      width: 100vw;
+    }
 
-  <div class="columns">
-    <div class="column is-two-thirds is-offset-2">
+    body {
+      height: 100%;
+      width: 100%;
+    }
+
+    .columns {
+      height: 100%;
+    }
+
+    .column.no-scroll {
+      overflow: auto;
+    }
+
+    .column.left-scroll {
+      direction: rtl;
+    }
+
+    .column.left-scroll nav {
+      direction: ltr;
+    }
+
+    .column.icons {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .icons div {
+      padding: 0.5em;
+    }
+
+    .column.info div.tabs ul {
+      width: 100%;
+      flex-direction: row;
+      -webkit-flex-direction: row;
+      flex-wrap: wrap;
+    }
+
+    .column.info div.tabs li {
+      width: 50%;
+    }
+  </style>
+
+  {{- partial "navbar.html" . -}}
+  <div class="columns is-gapless">
+    <div class="column icons is-narrow has-background-primary has-text-white is-hidden-touch">
+      <!--icons-->
+      <section class="section is-paddingless">
+        <div class="container has-text-centered has-text-grey-dark has-background-white is-fullwidth">
+          <span class="icon is-large">
+            <i class="fas fa-2x fa-file-alt"></i>
+
+          </span><br>
+          Notes
+        </div><br>
+        <div class="container has-text-centered">
+          <span class="icon is-large">
+            <i class="fas fa-2x fa-book"></i>
+
+          </span><br>
+          Literature
+        </div><br>
+        <div class="container has-text-centered">
+          <span class="icon is-large">
+            <i class="fas fa-2x fa-list-ul"></i>
+          </span><br>
+          Flow
+        </div><br>
+        <div class="container has-text-centered">
+          <span class="icon is-large">
+            <i class="fas fa-2x fa-feather-alt"></i>
+          </span><br>
+          Diary
+        </div>
+      </section>
+    </div>
+    <div class="column left-scroll no-scroll is-3 is-hidden-mobile">
+      {{ block "list" . }}
+      {{ end }}
+    </div>
+    <div class="column is-3 is-hidden-tablet">
+      <button class="button is-light is-fullwidth is-medium"><strong>Back to List of Notes</strong></button>
+    </div>
+    <div class="column no-scroll is-6">
       {{ block "main" . }}
       <!-- The part of the page that begins to differ between templates -->
       {{ end }}
     </div>
+    <div class="column info">
+      {{ block "info-panel" . }}
+      {{ end }}
+    </div>
   </div>
 
-  <footer class="footer">
+  <!--footer class="footer">
     {{ partial "footer.html" . }}
-  </footer>
+  </footer-->
 
   {{ partial "scripts.html" . }}
 
