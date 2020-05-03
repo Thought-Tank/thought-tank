@@ -1,11 +1,11 @@
-<nav class="navbar is-fixed-top" role="navigation" aria-label="main navigation">
+<nav class="navbar is-primary is-fixed-top" role="navigation" aria-label="main navigation">
     <div class="navbar-brand">
         <a class="navbar-item" href="{{ .Site.BaseURL }}/">
             {{ $logo := resources.Get (printf "svg/%s.svg" "thought-tank-logo-small")  | resources.Minify }}
             <span class="icon">
                 <img class="icon" src="{{ $logo.RelPermalink }}" alt="logo">
             </span>
-            <p class="title">
+            <p class="title has-text-white">
                 {{ .Site.Title}}
             </p>
         </a>
