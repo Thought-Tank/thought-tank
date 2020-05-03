@@ -1,7 +1,5 @@
 ---
 title: Flow
-menu: main
-weight: 10
 ---
 
 # Inboxes
