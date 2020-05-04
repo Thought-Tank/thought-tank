@@ -63,32 +63,18 @@
     <div class="column icons is-narrow has-background-primary has-text-white is-hidden-touch">
       <!--icons-->
       <section class="section is-paddingless">
-        <div class="container has-text-centered has-text-grey-dark has-background-white is-fullwidth">
+        {{ range .Site.Menus.main }}
+        {{ $isBelowMenuEntry := partial "linkHasPrefix" ( dict "link" $.RelPermalink "prefix" .URL ) }}
+        <a href="{{ .URL }}">
+        <div
+          class="container is-fullwidth has-text-centered {{ if $isBelowMenuEntry }} has-text-grey-dark has-background-white{{ end }}">
           <span class="icon is-large">
-            <i class="fas fa-2x fa-file-alt"></i>
-
-          </span><br>
-          Notes
-        </div><br>
-        <div class="container has-text-centered">
-          <span class="icon is-large">
-            <i class="fas fa-2x fa-book"></i>
-
-          </span><br>
-          Literature
-        </div><br>
-        <div class="container has-text-centered">
-          <span class="icon is-large">
-            <i class="fas fa-2x fa-list-ul"></i>
-          </span><br>
-          Flow
-        </div><br>
-        <div class="container has-text-centered">
-          <span class="icon is-large">
-            <i class="fas fa-2x fa-feather-alt"></i>
-          </span><br>
-          Diary
-        </div>
+              {{ .Pre }}
+            </span><br>
+            {{ .Name }}
+          </div>
+        </a>
+        {{ end }}
       </section>
     </div>
     <div class="column left-scroll no-scroll is-3 is-hidden-mobile">
@@ -98,13 +84,19 @@
     <div class="column is-3 is-hidden-tablet">
       <button class="button is-light is-fullwidth is-medium"><strong>Back to List of Notes</strong></button>
     </div>
-    <div class="column no-scroll is-6">
-      {{ block "main" . }}
-      <!-- The part of the page that begins to differ between templates -->
-      {{ end }}
-    </div>
-    <div class="column info">
-      {{ block "info-panel" . }}
+    <div class="column content">
+      {{ block "content" . }}
+      <div class="columns is-gapless">
+        <div class="column no-scroll is-two-thirds">
+          {{ block "main" . }}
+          <!-- The part of the page that begins to differ between templates -->
+          {{ end }}
+        </div>
+        <div class="column info">
+          {{ block "info-panel" . }}
+          {{ end }}
+        </div>
+      </div>
       {{ end }}
     </div>
   </div>

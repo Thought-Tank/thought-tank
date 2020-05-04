@@ -1,0 +1,2 @@
+{{ $filepath := printf "%s/" ( .link | path.Dir ) }}
+{{ return ne (strings.TrimPrefix .prefix $filepath) $filepath }}
