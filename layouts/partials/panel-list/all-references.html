@@ -1,0 +1,24 @@
+<!--panel-->
+<nav class="panel">
+    <p class="panel-heading is-radiusless">
+        List of References
+    </p>
+    <!--div class="panel-block">
+            <p class="control has-icons-left">
+                <input class="input" type="text" placeholder="Search">
+                <span class="icon is-left">
+                    <i class="fas fa-search" aria-hidden="true"></i>
+                </span>
+            </p>
+            </div-->
+    {{ range where .Site.RegularPages "Section" "references" }}
+    <a class="panel-block {{ if eq . $.Page }} is-active{{ end }}" href="{{ .RelPermalink }}">
+        <span class="panel-icon">
+            <i class="fas fa-book" aria-hidden="true"></i>
+        </span>
+        <span class="is-size-7">
+            {{ .Title }}
+        </span>
+    </a>
+    {{ end }}
+</nav>

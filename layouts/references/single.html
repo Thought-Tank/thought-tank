@@ -7,24 +7,33 @@
     <h2 class="subtitle is-4">{{ delimit . ", " " & " }}</h2>
     {{ end }}
 
-    <dl>
-      <dt><strong>Source</strong></dt>
-      <dd><a href="{{ .Params.link }}">{{ .Params.link }}</a></dd>
-      <dt><strong>Summary</strong></dt>
-      <dd>
-        <div class="content">
-          {{ .Content }}
-        </div>
-      </dd>
-      {{ with .Params.bibliography }}
-      <dt><strong>Bibliographic Details</strong></dt>
-      <dd>
-        <code>
-          {{ . }}
-        </code>
-      </dd>
-      {{ end }}
-    </dl>
+    <div class="conent">
+      {{ .Content }}
+    </div>
   </div>
 </section>
+{{ end }}
+
+{{ define "info-panel" }}
+<nav class="panel is-shadowless">
+  <p class="panel-heading is-radiusless">
+    Details
+  </p>
+  <dl>
+    <dt><strong>Source</strong></dt>
+    <dd><a href="{{ .Params.link }}">{{ .Params.link }}</a></dd>
+    {{ with .Params.bibliography }}
+    <dt><strong>Bibliographic Details</strong></dt>
+    <dd>
+      <code>
+          {{ . }}
+        </code>
+    </dd>
+    {{ end }}
+  </dl>
+</nav>
+{{ end }}
+
+{{ define "list" }}
+{{ partial "panel-list/all-references" . }}
 {{ end }}
