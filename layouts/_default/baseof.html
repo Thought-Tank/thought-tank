@@ -65,7 +65,7 @@
       <section class="section is-paddingless">
         {{ range .Site.Menus.main }}
         {{ $isBelowMenuEntry := partial "linkHasPrefix" ( dict "link" $.RelPermalink "prefix" .URL ) }}
-        <a href="{{ .URL }}">
+        <a class="has-text-white" href="{{ .URL }}">
         <div
           class="container is-fullwidth has-text-centered {{ if $isBelowMenuEntry }} has-text-grey-dark has-background-white{{ end }}">
           <span class="icon is-large">
