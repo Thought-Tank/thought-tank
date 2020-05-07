@@ -1,0 +1,18 @@
+<nav class="level">
+    <div class="level-left"></div>
+    <div class="level-right">
+        <div class="level-item">
+            {{ $link:= printf "[#](/%s/%s \"%s\")" .Section .Params.id .Title }}
+            <button class="button is-primary is-outlined is-small btn" data-clipboard-text="{{$link}}">
+                {{partial "fa-icon" (dict "icon" "regular/copy")}}
+                <span>Copy Link</span>
+            </button>
+        </div>
+        <div class="level-item">
+            <a class="button is-primary is-outlined is-small" href="/admin/#/edit/{{.Section}}/{{ .Params.id }}">
+                {{partial "fa-icon" (dict "icon" "regular/edit")}}
+                <span>Edit</span>
+            </a>
+        </div>
+    </div>
+</nav>

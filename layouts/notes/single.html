@@ -1,24 +1,9 @@
 {{ define "main" }}
+{{ partial "page-buttons" . }}
 <section class="section">
     <div class="container">
+
         <h1 class="title is-1">{{ .Title }}</h1>
-
-        <buttons class="is-right">
-            {{ if not .Params.lock }}
-            <a class="button is-primary is-outlined is-small" href="/admin/#/edit/notes/{{ .Params.id }}">
-                {{partial "fa-icon" (dict "icon" "regular/edit")}}
-                <span>Edit</span>
-            </a>
-            {{ end }}
-
-            {{ $link:= printf "[#](/notes/%s \"%s\")" .Params.id .Title }}
-            <button class="button is-primary is-outlined is-small btn" data-clipboard-text="{{$link}}">
-                {{partial "fa-icon" (dict "icon" "regular/copy")}}
-                <span>Copy Link</span>
-            </button>
-        </buttons>
-
-        {{ partial "keyword-line.html" (dict "content" . "tohighlight" .Params.keywords ) }}
 
         <div class="content">
             {{ .Content }}
@@ -45,7 +30,7 @@
         </ul>
     </div>
     <div class="container">
-        <div id="connections" class="content-tab"> 
+        <div id="connections" class="content-tab">
             {{ partial "panel-info/related.html" . }}
         </div>
 
