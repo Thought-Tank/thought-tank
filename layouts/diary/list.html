@@ -13,11 +13,11 @@
     {{ with $allNotes }}
     {{ $allNotesGrouped = $allNotes.GroupByParamDate "Lastmod" "2006-01-02" }}
     {{ else }}
-    No notes yet. Maybe you want to add some first.
+    No notes yet. Maybe you want to add some notes first.
     {{ end }}
 
-    {{ with $Paginator:= .Paginate $allNotesGrouped}}
-    {{ range $Paginator.PageGroups  }}
+    {{ with $Paginator:= .Paginate $allNotesGrouped }}
+    {{ range $Paginator.PageGroups }}
     <h2 class="title is-2">{{ dateFormat "Monday, 02.01.2006" .Key }}</h2>
 
     {{ range .Pages }}
