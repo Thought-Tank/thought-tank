@@ -12,6 +12,12 @@ module:
     mounts:
     - source: dist
       target: assets/js
+  - path: ../../node_modules/iframe-resizer
+    ignoreConfig: true
+    disable: false
+    mounts:
+    - source: js
+      target: assets/js
 
 menu:
   main:
