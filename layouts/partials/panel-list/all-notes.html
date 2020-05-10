@@ -12,7 +12,7 @@
             </p>
             </div-->
     {{ range where .Site.RegularPages "Section" "notes" }}
-    <a class="panel-block {{ if eq . $.Page }} is-active{{ end }}" href="{{ .RelPermalink }}">
+    <a class="panel-block {{ if eq . $.Page }} is-active{{ end }}" target="main" href="{{ .RelPermalink }}">
         <span class="panel-icon">
             <i class="fas fa-file-alt" aria-hidden="true"></i>
         </span>
