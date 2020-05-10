@@ -4,6 +4,28 @@
   new ClipboardJS('.btn');
 </script>
 
+{{ $iframeresizerjs:= resources.Get "js/iframeResizer.min.js" }}
+<script src="{{ $iframeresizerjs.RelPermalink }}"></script>
+<script>
+  iFrameResize({ 
+    log: true, 
+    checkOrigin:false,
+    onMessage: function (payload) {
+      if (payload.message.url) window.history.pushState({}, payload.message.title , payload.message.url);
+      document.title = payload.message.title;
+    },
+  }, '#mainContentIframe')
+</script>
+
+<script>
+  let params = (new URL(document.location)).searchParams;
+  let url = params.get('directurl');
+  console.log("Found URL Parameter: " + url );
+//  document.getElementById('mainContentIframe').srcdoc= null;
+//  document.getElementById('mainContentIframe').src = "http://google.de";
+</script>
+
+
 <script type="text/javascript">
   document.addEventListener('DOMContentLoaded', () => {
 
