@@ -1,30 +1,36 @@
-{{ define "content"}}
-<div class="columns is-multiline is-gapless">
+<html>
 
-    {{/* Show entrypoints into topic first */}}
-    {{ $allNotes := where .Pages "Section" "notes" }}
-    {{ $notesEntryPoints := where $allNotes "Params.tags" "intersect" (slice "entrypoint") }}
+<head>
+    {{- partial "header.html" . }}
+</head>
 
-    {{ with $notesEntryPoints }}
-    {{ range .ByTitle }}
-    <div class="column is-one-third">
-        {{ partial "generateNoteCard.html" (dict "notepage" . "siteContext" $.Site ) }}
+<body>
+    <div class="columns is-multiline is-gapless">
+
+        {{/* Show entrypoints into topic first */}}
+        {{ $allNotes := where .Pages "Section" "notes" }}
+        {{ $notesEntryPoints := where $allNotes "Params.tags" "intersect" (slice "entrypoint") }}
+
+        {{ with $notesEntryPoints }}
+        {{ range .ByTitle }}
+        <div class="column is-one-third">
+            {{ partial "generateNoteCard.html" (dict "notepage" . "siteContext" $.Site ) }}
+        </div>
+        {{ end }}
+        {{ end }}
+
+        {{ $notesBesideEntryPoints := $allNotes | complement $notesEntryPoints }}
+        {{ with $notesBesideEntryPoints }}
+        {{ range .ByTitle }}
+        <div class="column is-one-third">
+            {{ partial "generateNoteCard.html" (dict "notepage" . "siteContext" $.Site ) }}
+        </div>
+        {{ end }}
+        {{ end }}
     </div>
-    {{ end }}
-    {{ end }}
 
-    {{ $notesBesideEntryPoints := $allNotes | complement $notesEntryPoints }}
-    {{ with $notesBesideEntryPoints }}
-    {{ range .ByTitle }}
-    <div class="column is-one-third">
-        {{ partial "generateNoteCard.html" (dict "notepage" . "siteContext" $.Site ) }}
-    </div>
-    {{ end }}
-    {{ end }}
+    {{ partial "iframe/inner-scripts" . }}
 
-</div>
-{{ end }}
+</body>
 
-{{ define "list" }}
-{{ partial "panel-list/all-notes" . }}
-{{ end }}
+</html>

@@ -1,66 +1,78 @@
-{{ define "main" }}
-{{ partial "page-buttons" . }}
-<section class="section">
-    <div class="container">
+<html>
 
-        <h1 class="title is-1">{{ .Title }}</h1>
+<head>
+    {{- partial "header.html" . }}
+</head>
 
-        <div class="content">
-            {{ .Content }}
-        </div>
+<body>
+    <div class="column content">
+        <div class="columns is-gapless">
+            <div class="column no-scroll is-two-thirds">
+                {{ partial "page-buttons" . }}
+                <section class="section">
+                    <div class="container">
 
-        <div class="conten has-text-weight-semibold">
-            {{ .Summary}}
+                        <h1 class="title is-1">{{ .Title }}</h1>
+
+                        <div class="content">
+                            {{ .Content }}
+                        </div>
+
+                        <div class="conten has-text-weight-semibold">
+                            {{ .Summary}}
+                        </div>
+                    </div>
+                </section>
+            </div>
+            <div class="column info">
+                <nav class="panel is-shadowless">
+                    <p class="panel-heading is-radiusless">
+                        Note Info
+                    </p>
+                    <div class="tabs is-small">
+                        <ul>
+                            <li class="tab is-active" onclick="openTab(event,'connections')"><a>Connections</a></li>
+                            <li class="tab" onclick="openTab(event,'taxonomies')"><a>Taxonomies</a></li>
+                            <li class="tab" onclick="openTab(event,'references')"><a>References</a></li>
+                            <li class="tab" onclick="openTab(event,'graph')"><a>Graph</a></li>
+                        </ul>
+                    </div>
+                    <div class="container">
+                        <div id="connections" class="content-tab">
+                            {{ partial "panel-info/related.html" . }}
+                        </div>
+
+                        <div id="taxonomies" class="content-tab" style="display:none">
+                            {{ with .Params.topics }}
+                            <p class="subtitle is-5">Topic</p>
+                            <div class="content">{{ . }}</div>
+                            {{ end }}
+
+                            {{ with .Params.keywords }}<p class="subtitle is-5">Keywords</p>{{ end }}
+                            {{ partial "attribute-line.html" (dict "context" . "attribute" "keywords" ) }}
+
+                            {{ with .Params.tags }}<p class="subtitle is-5">Tags</p>{{ end }}
+                            {{ partial "attribute-line.html" (dict "context" . "attribute" "tags" ) }}
+
+                            {{ with .Params.flow }}<p class="subtitle is-5">Flow States</p>{{ end }}
+                            {{ partial "attribute-line.html" (dict "context" . "attribute" "flow" ) }}
+                        </div>
+
+                        <div id="references" class="content-tab" style="display:none">
+                            {{ partial "panel-info/references.html" . }}
+                        </div>
+
+                        <div id="graph" class="content-tab" style="display:none">
+                            Not implemented yet
+                        </div>
+                    </div>
+                </nav>
+            </div>
         </div>
     </div>
-</section>
-{{ end }}
 
-{{ define "info-panel" }}
-<nav class="panel is-shadowless">
-    <p class="panel-heading is-radiusless">
-        Note Info
-    </p>
-    <div class="tabs is-small">
-        <ul>
-            <li class="tab is-active" onclick="openTab(event,'connections')"><a>Connections</a></li>
-            <li class="tab" onclick="openTab(event,'taxonomies')"><a>Taxonomies</a></li>
-            <li class="tab" onclick="openTab(event,'references')"><a>References</a></li>
-            <li class="tab" onclick="openTab(event,'graph')"><a>Graph</a></li>
-        </ul>
-    </div>
-    <div class="container">
-        <div id="connections" class="content-tab">
-            {{ partial "panel-info/related.html" . }}
-        </div>
+    {{ partial "iframe/inner-scripts" . }}
 
-        <div id="taxonomies" class="content-tab" style="display:none">
-            {{ with .Params.topics }}
-            <p class="subtitle is-5">Topic</p>
-            <div class="content">{{ . }}</div>
-            {{ end }}
+</body>
 
-            {{ with .Params.keywords }}<p class="subtitle is-5">Keywords</p>{{ end }}
-            {{ partial "attribute-line.html" (dict "context" . "attribute" "keywords" ) }}
-
-            {{ with .Params.tags }}<p class="subtitle is-5">Tags</p>{{ end }}
-            {{ partial "attribute-line.html" (dict "context" . "attribute" "tags" ) }}
-
-            {{ with .Params.flow }}<p class="subtitle is-5">Flow States</p>{{ end }}
-            {{ partial "attribute-line.html" (dict "context" . "attribute" "flow" ) }}
-        </div>
-
-        <div id="references" class="content-tab" style="display:none">
-            {{ partial "panel-info/references.html" . }}
-        </div>
-
-        <div id="graph" class="content-tab" style="display:none">
-            Not implemented yet
-        </div>
-    </div>
-</nav>
-{{ end }}
-
-{{ define "list" }}
-{{ partial "panel-list/all-notes" . }}
-{{ end }}
+</html>
