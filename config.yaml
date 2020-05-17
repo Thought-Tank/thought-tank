@@ -24,7 +24,7 @@ menu:
   - name: Notes 
     weight: 10
     pre: <i class='fas fa-2x fa-file-alt'></i>
-    url: /notes/
+    url: /app/notes/
   - name: Flow
     weight: 30
     pre: <i class='fas fa-2x fa-list-ul'></i>
