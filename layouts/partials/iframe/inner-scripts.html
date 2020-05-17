@@ -1,14 +1,40 @@
 {{ $iframeresizercontentwindowjs:= resources.Get "js/iframeResizer.contentWindow.min.js" }}
 <script src="{{ $iframeresizercontentwindowjs.RelPermalink }}"></script>
 
+{{ $clipboardjs:= resources.Get "js/clipboard.min.js" }}
+<script src="{{ $clipboardjs.RelPermalink }}"></script>
+
 <script type="text/javascript">
-    window.iFrameResizer = {
-      onReady: function() {
-        window.parentIFrame.sendMessage({
-            url:"/app{{ .RelPermalink }}{{if .IsPage}}{{ urlize .Title }}/{{end}}",
-            title: "{{ .Title }}"
-        });
+  window.iFrameResizer = {
+    onReady: function () {
+      window.parentIFrame.sendMessage({
+        url: "/app{{ .RelPermalink }}{{if .IsPage}}{{ urlize .Title }}/{{end}}",
+        title: "{{ .Title }}"
+      });
     }
+  }
+
+  /* 
+   * COPY TO CLIPBOARD
+   */
+  new ClipboardJS('.btn');
+
+  /* 
+   * TABS
+   */
+
+  function openTab(evt, tabName) {
+    var i, x, tablinks;
+    x = document.getElementsByClassName("content-tab");
+    for (i = 0; i < x.length; i++) {
+      x[i].style.display = "none";
     }
-  </script>
-  
+    tablinks = document.getElementsByClassName("tab");
+    for (i = 0; i < x.length; i++) {
+      tablinks[i].className = tablinks[i].className.replace("is-active", "");
+    }
+    document.getElementById(tabName).style.display = "block";
+    evt.currentTarget.className += " is-active";
+  }
+
+</script>
