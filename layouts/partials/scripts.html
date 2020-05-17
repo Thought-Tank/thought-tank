@@ -6,27 +6,34 @@
 
 {{ $iframeresizerjs:= resources.Get "js/iframeResizer.min.js" }}
 <script src="{{ $iframeresizerjs.RelPermalink }}"></script>
-<script>
-  iFrameResize({ 
-    log: true, 
-    checkOrigin:false,
+
+<script type="text/javascript">
+  iFrameResize({
+    log: true,
+    checkOrigin: false,
     onMessage: function (payload) {
-      if (payload.message.url) window.history.pushState({}, payload.message.title , payload.message.url);
+      if (payload.message.url) window.history.pushState({}, payload.message.title, payload.message.url);
       document.title = payload.message.title;
     },
   }, '#mainContentIframe')
 </script>
 
-<script>
-  let params = (new URL(document.location)).searchParams;
-  let url = params.get('directurl');
-  console.log("Found URL Parameter: " + url );
-//  document.getElementById('mainContentIframe').srcdoc= null;
-//  document.getElementById('mainContentIframe').src = "http://google.de";
-</script>
-
 
 <script type="text/javascript">
+  /* 
+   * IFRAME CONTENT
+   * The app only forms the frame, but leaves the iFrame unfilled. 
+   * From the called URL the page infers the content for the iframe and updates it. 
+   */
+  console.log("[Thought Tank] location: " + document.URL);
+  console.log("[Thought Tank] match: " + document.URL.match("/notes/.*"));
+
+  document.getElementById('mainContentIframe').src = document.URL.match("/notes/.*");
+
+  /* 
+   * BURGER MENU
+   */
+
   document.addEventListener('DOMContentLoaded', () => {
 
     // Get all "navbar-burger" elements
@@ -53,17 +60,19 @@
 
   });
 
-  // Tabs
+  /* 
+   * TABS
+   */
 
   function openTab(evt, tabName) {
     var i, x, tablinks;
     x = document.getElementsByClassName("content-tab");
     for (i = 0; i < x.length; i++) {
-        x[i].style.display = "none";
+      x[i].style.display = "none";
     }
     tablinks = document.getElementsByClassName("tab");
     for (i = 0; i < x.length; i++) {
-        tablinks[i].className = tablinks[i].className.replace("is-active", "");
+      tablinks[i].className = tablinks[i].className.replace("is-active", "");
     }
     document.getElementById(tabName).style.display = "block";
     evt.currentTarget.className += " is-active";

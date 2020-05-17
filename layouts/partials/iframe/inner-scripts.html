@@ -1,11 +1,11 @@
 {{ $iframeresizercontentwindowjs:= resources.Get "js/iframeResizer.contentWindow.min.js" }}
 <script src="{{ $iframeresizercontentwindowjs.RelPermalink }}"></script>
 
-<script>
+<script type="text/javascript">
     window.iFrameResizer = {
       onReady: function() {
         window.parentIFrame.sendMessage({
-            url:"{{ .RelPermalink }}{{ urlize .Title }}",
+            url:"/app{{ .RelPermalink }}{{if .IsPage}}{{ urlize .Title }}/{{end}}",
             title: "{{ .Title }}"
         });
     }
