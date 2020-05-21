@@ -8,8 +8,12 @@
   window.iFrameResizer = {
     onReady: function () {
       window.parentIFrame.sendMessage({
-        url: "/app{{ .RelPermalink }}{{if .IsPage}}{{ urlize .Title }}/{{end}}",
-        title: "{{ .Title }}"
+        //url: "/app{{ .RelPermalink }}{{if .IsPage}}{{ urlize .Title }}/{{end}}",
+        file: "{{ .RelPermalink }}",
+        title: "{{ .Title }}",
+        title_urlize: "{{ urlize .Title }}",
+        {{ with .Params.id }} id: "{{ . }}", {{ end }}
+        dir: "{{ .File.Dir }}",
       });
     }
   }

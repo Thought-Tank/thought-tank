@@ -1,13 +1,17 @@
-
 {{ $iframeresizerjs:= resources.Get "js/iframeResizer.min.js" }}
 <script src="{{ $iframeresizerjs.RelPermalink }}"></script>
 
 <script type="text/javascript">
   iFrameResize({
-    log: true,
+    log: false,
     checkOrigin: false,
+    // Title and url should reflect the inner content, not the outer one.
     onMessage: function (payload) {
-      if (payload.message.url) window.history.pushState({}, payload.message.title, payload.message.url);
+      console.log("[Thought Tank] Message from content iFrame" + JSON.stringify(payload));
+
+      window.history.pushState({},
+        payload.message.title, 
+        {{ strings.TrimSuffix "/" .RelPermalink }} + payload.message.file + payload.message.title_urlize);
       document.title = payload.message.title;
     },
   }, '#mainContentIframe')
@@ -20,10 +24,20 @@
    * The app only forms the frame, but leaves the iFrame unfilled. 
    * From the called URL the page infers the content for the iframe and updates it. 
    */
+  // Wenn die URL über den Pfad (/app/<view>) hinaus gibt, der hinter Teil
+  // This is just excuted on loading the file 
   console.log("[Thought Tank] location: " + document.URL);
-  console.log("[Thought Tank] match: " + document.URL.match("/notes/.*"));
+  var reg_innerFile = "/.*\/app\/[^\/]*(\/(?:notes|references){1}\/[0-9]+)/";
+  var matches = document.URL.match(reg_innerFile);
 
-  document.getElementById('mainContentIframe').src = document.URL.match("/notes/.*");
+  if (matches) {
+    var param_innerFile = matches[1];
+    console.log("[Thought Tank] Found Parameter: " + param_innerFile );
+    document.getElementById('mainContentIframe').src = param_innerFile;
+  } else {
+    document.getElementById('mainContentIframe').src = {{ .Params.initialContent }};
+  }
+
 
   /* 
    * BURGER MENU
