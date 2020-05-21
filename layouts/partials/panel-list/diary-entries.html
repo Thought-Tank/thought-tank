@@ -1,0 +1,25 @@
+<nav class="panel">
+    <p class="panel-heading is-radiusless">
+        Diary Entries
+    </p>
+    <!--div class="panel-block">
+            <p class="control has-icons-left">
+                <input class="input" type="text" placeholder="Search">
+                <span class="icon is-left">
+                    <i class="fas fa-search" aria-hidden="true"></i>
+                </span>
+            </p>
+            </div-->
+    {{ range where .Site.RegularPages "Section" "notes" }}
+    {{ if (findRE "^[[:digit:]]{4}-[[:digit:]]{2}-[[:digit:]]{2}$" .Title 1) }}
+    <a class="panel-block {{ if eq . $.Page }} is-active{{ end }}" target="main" href="{{ .RelPermalink }}">
+        <span class="panel-icon">
+            <i class="fas fa-file-alt" aria-hidden="true"></i>
+        </span>
+        <span class="is-size-7">
+            {{ dateFormat "Monday, Jan 2, 2006" .Title }}
+        </span>
+    </a>
+    {{ end }}
+    {{ end }}
+</nav>
