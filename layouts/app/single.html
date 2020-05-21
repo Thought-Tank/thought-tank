@@ -1,0 +1,16 @@
+{{ define "list" }}
+{{ partial .Params.listPartial . }}
+{{ end }}
+
+{{ define "content"}}
+<style>
+    iframe {
+      width: 1px;
+      min-width: 100%;
+    }
+  </style>
+
+<iframe id='mainContentIframe' name="main">
+</iframe>
+
+{{ end }}
