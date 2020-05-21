@@ -1,22 +1,29 @@
-{{ define "main" }}
+<html>
 
-<section class="section">
-  <div class="container">
-    <h1 class="title is-1">{{ .Title }}</h1>
+<head>
+  {{- partial "header.html" . }}
+</head>
 
-    {{ with .Pages }}
-    {{ range . }}
-    <h2 class="title is-2"><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
+<body>
 
-    {{ .Content }}
-    {{ end }}
-    {{ else }}
-    No literature yet. You might want to add some references.
-    {{ end }}
-  </div>
-</section>
-{{ end }}
+  <section class="section">
+    <div class="container">
+      <h1 class="title is-1">{{ .Title }}</h1>
 
-{{ define "list" }}
-{{ partial "panel-list/all-references" . }}
-{{ end }}
+      {{ with .Pages }}
+      {{ range . }}
+      <h2 class="title is-2"><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
+
+      {{ .Content }}
+      {{ end }}
+      {{ else }}
+      No literature yet. You might want to add some references.
+      {{ end }}
+    </div>
+  </section>
+
+  {{ partial "iframe/inner-scripts" . }}
+
+</body>
+
+</html>
